@@ -15,12 +15,14 @@ class UserRepository {
     print(client);
     var user = json.decode(client.toString());
     User u = User(
-        email: user['email'].toString(),
-        id: user['id'].toString(),
-        name: user['name'].toString(),
-        sex: user['sex'].toString(),
-        phone: user['phone'].toString(),
-        address: user['address'].toString());
+      email: user['email'].toString(),
+      id: user['id'].toString(),
+      name: user['name'].toString(),
+      sex: user['sex'].toString(),
+      phone: user['phone'].toString(),
+      address: user['address'].toString(),
+      photo: user['image'].toString(),
+    );
     return u;
   }
 

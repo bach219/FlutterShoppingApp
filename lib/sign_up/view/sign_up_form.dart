@@ -350,7 +350,7 @@ class _SexInput extends StatelessWidget {
                   // hintText: "Email",
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Giới tính",
-                  errorText: state.sex.invalid ? 'Giới tính không đúng' : null,
+                  errorText: state.sex.invalid ? 'Nam | Nữ' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide(

@@ -5,6 +5,7 @@ import 'package:fluttercommerce/home/home.dart';
 import 'package:fluttercommerce/login/login.dart';
 import 'package:fluttercommerce/Repository/UserRepository/user_repository.dart';
 import 'package:fluttercommerce/splash/splash.dart';
+import 'package:hive/hive.dart';
 
 class App extends StatelessWidget {
   const App({
@@ -73,7 +74,7 @@ class _AppViewState extends State<AppView> {
             switch (state.status) {
               case AuthenticationStatus.authenticated:
                 _navigator.pushAndRemoveUntil<void>(
-                  HomePage.route(),
+                  Home.route(),
                   (route) => false,
                 );
                 break;
@@ -100,5 +101,10 @@ class _AppViewState extends State<AppView> {
       },
       onGenerateRoute: (_) => SplashPage.route(),
     );
+  }
+
+  void dispose() {
+    Hive.close();
+    super.dispose();
   }
 }

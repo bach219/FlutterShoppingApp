@@ -664,7 +664,7 @@ class _ProductPageState extends State<ProductPage> {
             ListTile(
               leading: CircleAvatar(
                 backgroundImage: NetworkImage(
-                    "https://www.familiadejesusperu.org/images/avatar/john-doe-13.jpg"),
+                    "https://miro.medium.com/fit/c/256/256/1*mZ3xXbns5BiBFxrdEwloKg.jpeg"),
               ),
               subtitle: Text(
                   "There was no ice cream in the freezer, nor did they have money to go to the store."),

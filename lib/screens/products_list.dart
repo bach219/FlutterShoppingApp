@@ -55,7 +55,7 @@ class _ProductListState extends State<ProductList> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(
-          "Man",
+          "Danh sách sản phẩm",
           style: TextStyle(color: Colors.black, fontSize: 16),
         ),
         leading: IconButton(
@@ -137,7 +137,7 @@ class _ProductListState extends State<ProductList> {
                 ),
               ),
               Text(
-                "Filter",
+                "Lọc sản phẩm",
                 style: TextStyle(color: Colors.white),
               ),
             ],
@@ -255,6 +255,19 @@ class _ProductListState extends State<ProductList> {
                   gradientColors: [Color(0XFFf28767), Colors.orange[400]],
                 ),
               ),
+              Center(
+                child: TrendingItem(
+                  product: Product(
+                      company: 'Xiaomi',
+                      name: 'Xiaomi Redmi Note8',
+                      icon: 'assets/mi1.png',
+                      rating: 3.5,
+                      price: '\$2,890'),
+                  gradientColors: [Color(0XFFf28767), Colors.orange[400]],
+                ),
+              ),
+              Container(),
+              Container(),
             ],
           ),
         ),

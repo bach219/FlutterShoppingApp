@@ -39,9 +39,11 @@ class Occasions extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        "Mobile Special Offer",
+                        "Siêu phẩm cuối năm",
                         style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.w600),
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFDBCC8F)),
                         textAlign: TextAlign.start,
                       ),
                       Icon(
@@ -126,12 +128,12 @@ class Occasions extends StatelessWidget {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 4.0),
-                                child: Text("Free Cargo"),
+                                child: Text("Miễn phí vận chuyển"),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 4.0),
                                 child: Text(
-                                  "Last 11 Item",
+                                  "Số lượng có hạn",
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor),
                                 ),
