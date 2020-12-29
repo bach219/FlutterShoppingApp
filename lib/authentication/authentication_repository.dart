@@ -99,13 +99,7 @@ class AuthenticationRepository {
     print(token);
     await CallApi().logOut(token);
     box.clear();
-    // UserRepository userRepository;
-    // var token = userRepository.getToken();
-    // print("token");
-    // print(token);
-    // await CallApi().logOut(token.toString());
     _controller.add(AuthenticationStatus.unauthenticated);
-    // box.close();
   }
 
   void dispose() => _controller.close();

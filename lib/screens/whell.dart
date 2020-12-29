@@ -5,7 +5,7 @@ import 'package:fluttercommerce/utils/navigator.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../widgets/board_view.dart';
-import '../models/model.dart';
+import '../models/luck.dart';
 import 'home.dart';
 
 class WhellFortune extends StatefulWidget {

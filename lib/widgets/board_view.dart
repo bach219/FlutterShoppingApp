@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'arrow_view.dart';
-import '../models/model.dart';
+import '../models/luck.dart';
 
 class BoardView extends StatefulWidget {
   final double angle;
