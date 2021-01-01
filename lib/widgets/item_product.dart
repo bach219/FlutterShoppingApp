@@ -4,6 +4,7 @@ import 'package:flutter_icons/ionicons.dart';
 import 'package:fluttercommerce/models/product.dart';
 import 'package:fluttercommerce/screens/product.dart';
 import 'package:fluttercommerce/widgets/star_rating.dart';
+import 'package:intl/intl.dart';
 
 class TrendingItem extends StatelessWidget {
   final Product product;
@@ -13,7 +14,7 @@ class TrendingItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double trendCardWidth = 140;
+    double trendCardWidth = 180;
 
     return GestureDetector(
       child: Stack(
@@ -31,7 +32,7 @@ class TrendingItem extends StatelessWidget {
                       children: <Widget>[
                         Spacer(),
                         Icon(
-                          Ionicons.getIconData("ios-heart-empty"),
+                          Ionicons.getIconData("ios-link"),
                           color: Colors.black54,
                         )
                       ],
@@ -58,16 +59,24 @@ class TrendingItem extends StatelessWidget {
   }
 
   _productImage() {
+    // print("image");
+    // print(product.icon);
     return Stack(
       children: <Widget>[
         Center(
           child: Container(
-            width: 75,
+            width: 100,
             height: 75,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(product.icon), fit: BoxFit.contain),
+            child: FadeInImage.assetNetwork(
+              placeholder: "assets/Spinner.gif",
+              image:
+                  "http://192.168.100.18/AppStore/public/layout/images/avatar/${product.icon}",
+              fit: BoxFit.contain,
             ),
+            // decoration: BoxDecoration(
+            //   image: DecorationImage(
+            //       image: AssetImage(product.icon), fit: BoxFit.contain),
+            // ),
           ),
         )
       ],
@@ -84,25 +93,28 @@ class TrendingItem extends StatelessWidget {
         ),
         Text(
           product.name,
+          overflow: TextOverflow.fade,
+          maxLines: 1,
+          softWrap: false,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
         ),
         StarRating(rating: product.rating, size: 10),
         Row(
           children: <Widget>[
-            Text(product.price,
+            Text(NumberFormat.currency(locale: 'vi').format((product.price)),
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.red)),
-            Text(
-              '#00.000',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 10,
-                  decoration: TextDecoration.lineThrough),
-            )
           ],
-        )
+        ),
+        Text(
+          NumberFormat.currency(locale: 'vi').format((product.price)),
+          style: TextStyle(
+              color: Colors.grey,
+              fontSize: 10,
+              decoration: TextDecoration.lineThrough),
+        ),
       ],
     );
   }

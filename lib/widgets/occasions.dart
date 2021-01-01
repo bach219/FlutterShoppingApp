@@ -20,7 +20,7 @@ class Occasions extends StatelessWidget {
                   icon: 'assets/iphone_7.png',
                   rating: 4.5,
                   remainingQuantity: 5,
-                  price: '\$2,000'),
+                  price: 2000),
             ));
       },
       child: Container(

@@ -7,22 +7,21 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:fluttercommerce/models/product.dart';
-import 'package:fluttercommerce/painters/circlepainters.dart';
 import 'package:fluttercommerce/screens/products_list.dart';
 import 'package:fluttercommerce/screens/search.dart';
 import 'package:fluttercommerce/screens/shoppingcart.dart';
 import 'package:fluttercommerce/screens/usersettings.dart';
 import 'package:fluttercommerce/screens/whell.dart';
 import 'package:fluttercommerce/utils/constant.dart';
-import 'package:fluttercommerce/widgets/item_product.dart';
-import 'package:fluttercommerce/widgets/occasions.dart';
 import 'package:fluttercommerce/utils/navigator.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:fluttercommerce/Repository/UserRepository/user_repository.dart';
 import 'package:fluttercommerce/screens/screens.dart';
-import 'package:fluttercommerce/home/bloc/home_bloc.dart';
+import 'package:fluttercommerce/home/bloc/home_bloc/home_bloc.dart';
+import '../../home.dart';
 import 'home_page.dart';
+import 'package:fluttercommerce/models/models.dart';
+import 'package:fluttercommerce/product_list/view/product_list_view.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -32,22 +31,26 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentIndex = 0;
   User client = User.empty;
-  // HomeBloc _homeBloc;
+  double widget1Opacity = 0.0;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(milliseconds: 30), () {
+      widget1Opacity = 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        print("state.status");
-        print(state.status);
         switch (state.status) {
           case HomeStatus.failure:
-            return const Center(child: Text('failed to fetch posts'));
+            // return const Center(child: Text('failed to fetch posts'));
+            return const Center(child: CircularProgressIndicator());
           case HomeStatus.initial:
-            // if (state.listNew.isEmpty) {
-            //   return const Center(child: Text('no posts'));
-            // }
             return DefaultTabController(
               length: 4,
               child: Scaffold(
@@ -74,38 +77,19 @@ class _HomeState extends State<Home> {
                   unselectedLabelColor: Colors.blueGrey,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicatorPadding: EdgeInsets.all(8.0),
-                  indicatorColor: Colors.red,
+                  indicatorColor: Colors.black,
                 ),
                 //Thanh BAR nam duoi
                 body: TabBarView(
                   children: [
                     Container(
+                        child: AnimatedOpacity(
+                      opacity: widget1Opacity,
+                      duration: Duration(seconds: 1),
                       child: SingleChildScrollView(
                         child: Column(
                           children: <Widget>[
-                            CategoriesListView(
-                              title: "YOUR TITLES",
-                              categories: [
-                                'menu.png',
-                                'tshirt.png',
-                                'telephone.png',
-                                'armchair.png',
-                                'baby.png',
-                                'lipstick.png',
-                                'diamond.png',
-                                'book.png'
-                              ],
-                              categoryTitle: [
-                                'All',
-                                'Dress',
-                                'Electronic',
-                                'Home',
-                                'Baby',
-                                'Fashion',
-                                'Jewel',
-                                'Book'
-                              ],
-                            ),
+                            ListFunctionalityPage(),
                             buildCarouselSlider(),
                             SizedBox(
                               height: 5.0,
@@ -130,7 +114,7 @@ class _HomeState extends State<Home> {
                                           context,
                                           PageTransition(
                                             type: PageTransitionType.fade,
-                                            child: ProductList(),
+                                            child: ProductListPage(),
                                           ),
                                         );
                                       },
@@ -145,7 +129,7 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                             ),
-                            buildTrending(),
+                            ListNewProductPage(),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: Row(
@@ -162,7 +146,13 @@ class _HomeState extends State<Home> {
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () {
-                                        print("Clicked");
+                                        Navigator.push(
+                                          context,
+                                          PageTransition(
+                                            type: PageTransitionType.fade,
+                                            child: ProductListPage(),
+                                          ),
+                                        );
                                       },
                                       child: Text(
                                         "Xem trọn bộ",
@@ -175,13 +165,13 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                             ),
-                            buildTrending(),
-                            Occasions(),
-                            Occasions(),
+                            ListSellProductPage(),
+                            BestSellProductPage(),
+                            BestExpensiveProductPage(),
                           ],
                         ),
                       ),
-                    ),
+                    )),
                     WhellFortune(),
                     ShoppingCart(false),
                     UserSettings(),
@@ -193,251 +183,6 @@ class _HomeState extends State<Home> {
             return const Center(child: CircularProgressIndicator());
         }
       },
-    );
-  }
-
-  // DefaultTabController _defaultTabController() {
-  //   return DefaultTabController(
-  //     length: 4,
-  //     child: Scaffold(
-  //       backgroundColor: Colors.white,
-  //       key: _scaffoldKey,
-  //       drawer: Drawer(child: leftDrawerMenu()),
-  //       appBar: buildAppBar(context),
-  //       bottomNavigationBar: new TabBar(
-  //         tabs: [
-  //           Tab(
-  //             icon: new Icon(Icons.home),
-  //           ),
-  //           Tab(
-  //             icon: new Icon(Icons.attach_money),
-  //           ),
-  //           Tab(
-  //             icon: new Icon(Icons.shopping_cart),
-  //           ),
-  //           Tab(
-  //             icon: new Icon(Icons.account_circle),
-  //           )
-  //         ],
-  //         labelColor: Theme.of(context).primaryColor,
-  //         unselectedLabelColor: Colors.blueGrey,
-  //         indicatorSize: TabBarIndicatorSize.label,
-  //         indicatorPadding: EdgeInsets.all(8.0),
-  //         indicatorColor: Colors.red,
-  //       ),
-  //       //Thanh BAR nam duoi
-  //       body: TabBarView(
-  //         children: [
-  //           Container(
-  //             child: SingleChildScrollView(
-  //               child: Column(
-  //                 children: <Widget>[
-  //                   CategoriesListView(
-  //                     title: "YOUR TITLES",
-  //                     categories: [
-  //                       'menu.png',
-  //                       'tshirt.png',
-  //                       'telephone.png',
-  //                       'armchair.png',
-  //                       'baby.png',
-  //                       'lipstick.png',
-  //                       'diamond.png',
-  //                       'book.png'
-  //                     ],
-  //                     categoryTitle: [
-  //                       'All',
-  //                       'Dress',
-  //                       'Electronic',
-  //                       'Home',
-  //                       'Baby',
-  //                       'Fashion',
-  //                       'Jewel',
-  //                       'Book'
-  //                     ],
-  //                   ),
-  //                   buildCarouselSlider(),
-  //                   SizedBox(
-  //                     height: 5.0,
-  //                   ),
-  //                   Padding(
-  //                     padding: const EdgeInsets.all(6.0),
-  //                     child: Row(
-  //                       children: <Widget>[
-  //                         Expanded(
-  //                           child: Text(
-  //                             "Nổi bật",
-  //                             style: TextStyle(
-  //                                 fontSize: 20.0, fontWeight: FontWeight.bold),
-  //                             textAlign: TextAlign.start,
-  //                           ),
-  //                         ),
-  //                         Expanded(
-  //                           child: GestureDetector(
-  //                             onTap: () {
-  //                               Navigator.push(
-  //                                 context,
-  //                                 PageTransition(
-  //                                   type: PageTransitionType.fade,
-  //                                   child: ProductList(),
-  //                                 ),
-  //                               );
-  //                             },
-  //                             child: Text(
-  //                               "Xem trọn bộ",
-  //                               style: TextStyle(
-  //                                   fontSize: 18.0, color: Colors.blue),
-  //                               textAlign: TextAlign.end,
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   buildTrending(),
-  //                   Padding(
-  //                     padding: const EdgeInsets.all(6.0),
-  //                     child: Row(
-  //                       children: <Widget>[
-  //                         Expanded(
-  //                           child: Text(
-  //                             "Bán chạy",
-  //                             style: TextStyle(
-  //                                 fontSize: 20.0, fontWeight: FontWeight.bold),
-  //                             textAlign: TextAlign.start,
-  //                           ),
-  //                         ),
-  //                         Expanded(
-  //                           child: GestureDetector(
-  //                             onTap: () {
-  //                               print("Clicked");
-  //                             },
-  //                             child: Text(
-  //                               "Xem trọn bộ",
-  //                               style: TextStyle(
-  //                                   fontSize: 18.0, color: Colors.blue),
-  //                               textAlign: TextAlign.end,
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   buildTrending(),
-  //                   Occasions(),
-  //                   Occasions(),
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //           WhellFortune(),
-  //           ShoppingCart(false),
-  //           UserSettings(),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  Column buildTrending() {
-    // await Hive.openBox('Box');
-    // var box = Hive.box('Box');
-    // String client = box.get('client');
-    // box.close();
-    return Column(
-      children: <Widget>[
-        Container(
-          height: 180,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              TrendingItem(
-                product: Product(
-                    company: 'Apple',
-                    name: 'iPhone 11 (128GB)',
-                    icon: 'assets/phone1.jpeg',
-                    rating: 4.5,
-                    remainingQuantity: 5,
-                    price: '\$4,000'),
-                gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
-              ),
-              TrendingItem(
-                product: Product(
-                    company: 'iPhone',
-                    name: 'iPhone 11 (64GB)',
-                    icon: 'assets/phone2.jpeg',
-                    rating: 4.5,
-                    price: '\$3,890'),
-                gradientColors: [Color(0XFF6eed8c), Colors.green[400]],
-              ),
-              TrendingItem(
-                product: Product(
-                    company: 'Xiaomi',
-                    name: 'Xiaomi Redmi Note8',
-                    icon: 'assets/mi1.png',
-                    rating: 3.5,
-                    price: '\$2,890'),
-                gradientColors: [Color(0XFFf28767), Colors.orange[400]],
-              ),
-              TrendingItem(
-                product: Product(
-                    company: 'Apple',
-                    name: 'iPhone 11 (128GB)',
-                    icon: 'assets/phone1.jpeg',
-                    rating: 4.5,
-                    remainingQuantity: 5,
-                    price: '\$4,000'),
-                gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
-              ),
-              TrendingItem(
-                product: Product(
-                    company: 'iPhone',
-                    name: 'iPhone 11 (64GB)',
-                    icon: 'assets/phone2.jpeg',
-                    rating: 4.5,
-                    price: '\$3,890'),
-                gradientColors: [Color(0XFF6eed8c), Colors.green[400]],
-              ),
-              TrendingItem(
-                product: Product(
-                    company: 'Xiaomi',
-                    name: 'Xiaomi Redmi Note8',
-                    icon: 'assets/mi1.png',
-                    rating: 3.5,
-                    price: '\$2,890'),
-                gradientColors: [Color(0XFFf28767), Colors.orange[400]],
-              ),
-              TrendingItem(
-                product: Product(
-                    company: 'Apple',
-                    name: 'iPhone 11 (128GB)',
-                    icon: 'assets/phone1.jpeg',
-                    rating: 4.5,
-                    remainingQuantity: 5,
-                    price: '\$4,000'),
-                gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
-              ),
-              TrendingItem(
-                product: Product(
-                    company: 'iPhone',
-                    name: 'iPhone 11 (64GB)',
-                    icon: 'assets/phone2.jpeg',
-                    rating: 4.5,
-                    price: '\$3,890'),
-                gradientColors: [Color(0XFF6eed8c), Colors.green[400]],
-              ),
-              TrendingItem(
-                product: Product(
-                    company: 'Xiaomi',
-                    name: 'Xiaomi Redmi Note8',
-                    icon: 'assets/mi1.png',
-                    rating: 3.5,
-                    price: '\$2,890'),
-                gradientColors: [Color(0XFFf28767), Colors.orange[400]],
-              ),
-            ],
-          ),
-        )
-      ],
     );
   }
 
@@ -535,7 +280,7 @@ class _HomeState extends State<Home> {
             User getClient = await UserRepository().getUser();
             setState(() {
               client = getClient;
-              print(client.name);
+              // print(client.name);
             });
             _scaffoldKey.currentState.openDrawer();
           }),
@@ -812,96 +557,6 @@ class _HomeState extends State<Home> {
             onTap: () {
               SystemChannels.platform.invokeMethod('SystemNavigator.pop');
             },
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CategoriesListView extends StatelessWidget {
-  final String title;
-  final List<String> categories;
-  final List<String> categoryTitle;
-
-  const CategoriesListView(
-      {Key key,
-      @required this.title,
-      @required this.categories,
-      @required this.categoryTitle})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: LinePainter(),
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(top: 12),
-            height: 90,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.fade,
-                        child: ProductList(),
-                      ),
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Container(
-                          width: 55,
-                          height: 55,
-                          padding: EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.blueGrey,
-                              width: 1,
-                            ),
-                          ),
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/images/" + categories[index],
-                                ),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            categoryTitle[index],
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: 'Regular',
-                              color: Colors.black,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
           ),
         ],
       ),

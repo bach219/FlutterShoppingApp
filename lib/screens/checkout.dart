@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/ionicons.dart';
 import 'package:fluttercommerce/utils/navigator.dart';
+import 'package:fluttercommerce/home/view/home_view/home_page.dart';
 
 import 'home.dart';
 
@@ -169,7 +170,7 @@ class _CheckoutState extends State<Checkout> {
                                             Expanded(
                                               child: InkWell(
                                                 onTap: () {
-                                                  Nav.route(context, Home());
+                                                  Nav.route(context, HomePage());
                                                 },
                                                 child: Text(
                                                   "Continue Shopping",

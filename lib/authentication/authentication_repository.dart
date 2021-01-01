@@ -25,9 +25,6 @@ class AuthenticationRepository {
     var data = {'email': email, 'password': password};
     var res = await CallApi().postData(data, 'login');
     var body = json.decode(res.body);
-    // print("ahihi");
-    // print(body);
-    // print("ahihi");
     await Hive.openBox('Box');
     var box = Hive.box('Box');
     box.put('token', body['token'].toString());
@@ -70,19 +67,10 @@ class AuthenticationRepository {
     };
     var res = await CallApi().postData(data, 'signup');
     var body = json.decode(res.body);
-    // print("ahihi");
-    // print(res.statusCode);
-    // print("ahihi");
-    // print(body);
-    // print("ahihi");
     await Hive.openBox('Box');
     var box = Hive.box('Box');
     box.put('token', body['token'].toString());
     box.put('client', json.encode(body['client']).toString());
-    box.close();
-    // MySharedPreferences.instance
-    //     .setStringValue("client", json.encode(body['client']));
-    // print(MySharedPreferences.instance.getStringValue('client').toString());
     if (res.statusCode.toString() == '200')
       await Future.delayed(
         const Duration(milliseconds: 300),

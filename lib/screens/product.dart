@@ -768,7 +768,7 @@ class _ProductPageState extends State<ProductPage> {
                     icon: 'assets/iphone_7.png',
                     rating: 4.5,
                     remainingQuantity: 5,
-                    price: '\$2,000'),
+                    price: 2000),
                 gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
               ),
               TrendingItem(
@@ -778,7 +778,7 @@ class _ProductPageState extends State<ProductPage> {
                     icon: 'assets/phone1.jpeg',
                     rating: 4.5,
                     remainingQuantity: 5,
-                    price: '\$4,000'),
+                    price: 4000),
                 gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
               ),
               TrendingItem(
@@ -787,7 +787,7 @@ class _ProductPageState extends State<ProductPage> {
                     name: 'iPhone 11 (64GB)',
                     icon: 'assets/phone2.jpeg',
                     rating: 4.5,
-                    price: '\$3,890'),
+                    price: 3890),
                 gradientColors: [Color(0XFF6eed8c), Colors.green[400]],
               ),
               TrendingItem(
@@ -796,7 +796,7 @@ class _ProductPageState extends State<ProductPage> {
                     name: 'Xiaomi Redmi Note8',
                     icon: 'assets/mi1.png',
                     rating: 3.5,
-                    price: '\$2,890'),
+                    price: 2890),
                 gradientColors: [Color(0XFFf28767), Colors.orange[400]],
               ),
               TrendingItem(
@@ -806,7 +806,7 @@ class _ProductPageState extends State<ProductPage> {
                     icon: 'assets/phone1.jpeg',
                     rating: 4.5,
                     remainingQuantity: 5,
-                    price: '\$4,000'),
+                    price: 4000),
                 gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
               ),
               TrendingItem(
@@ -815,7 +815,7 @@ class _ProductPageState extends State<ProductPage> {
                     name: 'iPhone 11 (64GB)',
                     icon: 'assets/phone2.jpeg',
                     rating: 4.5,
-                    price: '\$3,890'),
+                    price: 3890),
                 gradientColors: [Color(0XFF6eed8c), Colors.green[400]],
               ),
               TrendingItem(
@@ -824,7 +824,7 @@ class _ProductPageState extends State<ProductPage> {
                     name: 'Xiaomi Redmi Note8',
                     icon: 'assets/mi1.png',
                     rating: 3.5,
-                    price: '\$2,890'),
+                    price: 2890),
                 gradientColors: [Color(0XFFf28767), Colors.orange[400]],
               ),
               TrendingItem(
@@ -834,7 +834,7 @@ class _ProductPageState extends State<ProductPage> {
                     icon: 'assets/phone1.jpeg',
                     rating: 4.5,
                     remainingQuantity: 5,
-                    price: '\$4,000'),
+                    price: 4000),
                 gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
               ),
               TrendingItem(
@@ -843,7 +843,7 @@ class _ProductPageState extends State<ProductPage> {
                     name: 'iPhone 11 (64GB)',
                     icon: 'assets/phone2.jpeg',
                     rating: 4.5,
-                    price: '\$3,890'),
+                    price: 3890),
                 gradientColors: [Color(0XFF6eed8c), Colors.green[400]],
               ),
               TrendingItem(
@@ -852,7 +852,7 @@ class _ProductPageState extends State<ProductPage> {
                     name: 'Xiaomi Redmi Note8',
                     icon: 'assets/mi1.png',
                     rating: 3.5,
-                    price: '\$2,890'),
+                    price: 2890),
                 gradientColors: [Color(0XFFf28767), Colors.orange[400]],
               ),
             ],

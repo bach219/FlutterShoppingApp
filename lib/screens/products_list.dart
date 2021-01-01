@@ -26,23 +26,23 @@ class _ProductListState extends State<ProductList> {
   PanelController slidingUpController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  List<String> widgetList = [
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C',
-    'A',
-    'B',
-    'C'
-  ];
+  // List<String> widgetList = [
+  //   'A',
+  //   'B',
+  //   'C',
+  //   'A',
+  //   'B',
+  //   'C',
+  //   'A',
+  //   'B',
+  //   'C',
+  //   'A',
+  //   'B',
+  //   'C',
+  //   'A',
+  //   'B',
+  //   'C'
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -78,20 +78,20 @@ class _ProductListState extends State<ProductList> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: SizedBox(
-              height: 18.0,
-              width: 18.0,
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  MaterialCommunityIcons.getIconData("heart-outline"),
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 16.0),
+          //   child: SizedBox(
+          //     height: 18.0,
+          //     width: 18.0,
+          //     child: IconButton(
+          //       onPressed: () {},
+          //       icon: Icon(
+          //         MaterialCommunityIcons.getIconData("heart-outline"),
+          //         color: Colors.black,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.only(right: 24.0),
             child: SizedBox(
@@ -161,7 +161,7 @@ class _ProductListState extends State<ProductList> {
                       icon: 'assets/phone1.jpeg',
                       rating: 4.5,
                       remainingQuantity: 5,
-                      price: '\$4,000'),
+                      price: 4000),
                   gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
                 ),
               ),
@@ -172,7 +172,7 @@ class _ProductListState extends State<ProductList> {
                       name: 'iPhone 11 (64GB)',
                       icon: 'assets/phone2.jpeg',
                       rating: 4.5,
-                      price: '\$3,890'),
+                      price: 3890),
                   gradientColors: [Color(0XFF6eed8c), Colors.green[400]],
                 ),
               ),
@@ -183,7 +183,7 @@ class _ProductListState extends State<ProductList> {
                       name: 'Xiaomi Redmi Note8',
                       icon: 'assets/mi1.png',
                       rating: 3.5,
-                      price: '\$2,890'),
+                      price: 2890),
                   gradientColors: [Color(0XFFf28767), Colors.orange[400]],
                 ),
               ),
@@ -195,7 +195,7 @@ class _ProductListState extends State<ProductList> {
                       icon: 'assets/phone1.jpeg',
                       rating: 4.5,
                       remainingQuantity: 5,
-                      price: '\$4,000'),
+                      price: 4000),
                   gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
                 ),
               ),
@@ -206,7 +206,7 @@ class _ProductListState extends State<ProductList> {
                       name: 'iPhone 11 (64GB)',
                       icon: 'assets/phone2.jpeg',
                       rating: 4.5,
-                      price: '\$3,890'),
+                      price: 3890),
                   gradientColors: [Color(0XFF6eed8c), Colors.green[400]],
                 ),
               ),
@@ -217,7 +217,7 @@ class _ProductListState extends State<ProductList> {
                       name: 'Xiaomi Redmi Note8',
                       icon: 'assets/mi1.png',
                       rating: 3.5,
-                      price: '\$2,890'),
+                      price: 2890),
                   gradientColors: [Color(0XFFf28767), Colors.orange[400]],
                 ),
               ),
@@ -229,7 +229,7 @@ class _ProductListState extends State<ProductList> {
                       icon: 'assets/phone1.jpeg',
                       rating: 4.5,
                       remainingQuantity: 5,
-                      price: '\$4,000'),
+                      price: 4000),
                   gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
                 ),
               ),
@@ -240,7 +240,7 @@ class _ProductListState extends State<ProductList> {
                       name: 'iPhone 11 (64GB)',
                       icon: 'assets/phone2.jpeg',
                       rating: 4.5,
-                      price: '\$3,890'),
+                      price: 3890),
                   gradientColors: [Color(0XFF6eed8c), Colors.green[400]],
                 ),
               ),
@@ -251,7 +251,7 @@ class _ProductListState extends State<ProductList> {
                       name: 'Xiaomi Redmi Note8',
                       icon: 'assets/mi1.png',
                       rating: 3.5,
-                      price: '\$2,890'),
+                      price: 2890),
                   gradientColors: [Color(0XFFf28767), Colors.orange[400]],
                 ),
               ),
@@ -262,7 +262,7 @@ class _ProductListState extends State<ProductList> {
                       name: 'Xiaomi Redmi Note8',
                       icon: 'assets/mi1.png',
                       rating: 3.5,
-                      price: '\$2,890'),
+                      price: 2890),
                   gradientColors: [Color(0XFFf28767), Colors.orange[400]],
                 ),
               ),

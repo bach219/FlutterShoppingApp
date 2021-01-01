@@ -1,0 +1,1 @@
+export 'list_new_product_bloc.dart';

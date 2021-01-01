@@ -7,6 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../widgets/board_view.dart';
 import '../models/luck.dart';
 import 'home.dart';
+import 'package:fluttercommerce/home/view/home_view/home_page.dart';
 
 class WhellFortune extends StatefulWidget {
   @override
@@ -146,7 +147,7 @@ class _WhellFortuneState extends State<WhellFortune>
             "GO SHOPPING",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Nav.route(context, Home()),
+          onPressed: () => Nav.route(context, HomePage()),
           color: Color.fromRGBO(0, 179, 134, 1.0),
         ),
       ],

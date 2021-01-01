@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:fluttercommerce/authentication/authentication.dart';
+import 'package:fluttercommerce/models/models.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';

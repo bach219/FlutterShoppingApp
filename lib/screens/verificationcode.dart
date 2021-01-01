@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttercommerce/utils/codeinput.dart';
 import 'home.dart';
 import 'package:fluttercommerce/utils/progressdialog.dart';
+import 'package:fluttercommerce/home/view/home_view/home_page.dart';
 
 class VerificationScreen extends StatefulWidget {
   @override
@@ -48,7 +49,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                           pr.hide();
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => Home()),
+                            MaterialPageRoute(builder: (context) => HomePage()),
                           );
                         });
                       });
@@ -66,7 +67,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   onTap: () => {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => Home()),
+                      MaterialPageRoute(builder: (context) => HomePage()),
                     ),
                   },
                   child: Padding(

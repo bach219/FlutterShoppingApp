@@ -122,7 +122,7 @@ class TrendingItem extends StatelessWidget {
         StarRating(rating: product.rating, size: 10),
         Row(
           children: <Widget>[
-            Text(product.price,
+            Text(product.price.toString(),
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
