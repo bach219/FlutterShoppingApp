@@ -6,6 +6,7 @@ import 'package:fluttercommerce/login/login.dart';
 import 'package:fluttercommerce/Repository/UserRepository/user_repository.dart';
 import 'package:fluttercommerce/splash/splash.dart';
 import 'package:hive/hive.dart';
+import 'package:fluttercommerce/Repository/UserRepository/user_repository.dart';
 
 class App extends StatelessWidget {
   const App({

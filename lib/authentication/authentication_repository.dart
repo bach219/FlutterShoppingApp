@@ -30,7 +30,7 @@ class AuthenticationRepository {
     box.put('token', body['token'].toString());
     print(body['token']);
     box.put('client', json.encode(body['client']).toString());
-    box.close();
+    // box.close();
     if (res.statusCode.toString() == '200')
       await Future.delayed(
         const Duration(milliseconds: 300),

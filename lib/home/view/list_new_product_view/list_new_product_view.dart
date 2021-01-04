@@ -44,12 +44,14 @@ class _ListNewProductState extends State<ListNewProduct> {
                     itemBuilder: (context, int index) {
                       return TrendingItem(
                         product: Product(
+                            id: listNew[index].id,
                             company: listNew[index].company,
                             name: listNew[index].name,
                             icon: listNew[index].icon,
                             rating: 4.5,
                             remainingQuantity: listNew[index].remainingQuantity,
-                            price: listNew[index].price),
+                            price: listNew[index].price,
+                            sale: listNew[index].sale),
                         gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
                       );
                     },

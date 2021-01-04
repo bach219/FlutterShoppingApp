@@ -103,6 +103,10 @@ class _EmailInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
+                  prefixIcon: Icon(
+                    Icons.email,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -145,6 +149,10 @@ class _PasswordInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
+                  prefixIcon: Icon(
+                    Icons.code,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),

@@ -49,16 +49,7 @@ class ListProductBloc extends Bloc<ListProductEvent, ListProductState> {
       return state.copyWith(status: ListProductStatus.failure);
     }
   }
-
-  // Future<Map<String, String>> getToken() async {
-  //   await Hive.openBox('Box');
-  //   var box = Hive.box('Box');
-  //   String token = box.get('token');
-  //   // box.close();
-  //   var data = {'token': token};
-  //   return data;
-  // }
-
+  
   Future<List<Product>> _fetchListNew() async {
     print("listProductNew");
     var data = await UserRepository().getToken();
@@ -75,6 +66,7 @@ class ListProductBloc extends Bloc<ListProductEvent, ListProductState> {
           price: double.parse(json['prod_price'].toString()),
           remainingQuantity: json['prod_qty'] as int,
           description: json['prod_name'] as String,
+          sale: double.parse(json['prod_sale'].toString()),
         );
       }).toList();
     }

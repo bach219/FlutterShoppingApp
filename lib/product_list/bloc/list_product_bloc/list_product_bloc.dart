@@ -75,6 +75,7 @@ class ListProductBloc extends Bloc<ListProductEvent, ListProductState> {
           price: double.parse(json['prod_price'].toString()),
           remainingQuantity: json['prod_qty'] as int,
           description: json['prod_name'] as String,
+          sale: double.parse(json['prod_sale'].toString()),
         );
       }).toList();
     }

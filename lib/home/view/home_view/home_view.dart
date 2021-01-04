@@ -15,13 +15,14 @@ import 'package:fluttercommerce/screens/whell.dart';
 import 'package:fluttercommerce/utils/constant.dart';
 import 'package:fluttercommerce/utils/navigator.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:fluttercommerce/Repository/UserRepository/user_repository.dart';
+import 'package:fluttercommerce/Repository/repository.dart';
 import 'package:fluttercommerce/screens/screens.dart';
 import 'package:fluttercommerce/home/bloc/home_bloc/home_bloc.dart';
 import '../../home.dart';
 import 'home_page.dart';
 import 'package:fluttercommerce/models/models.dart';
 import 'package:fluttercommerce/product_list/view/product_list_view.dart';
+import 'package:fluttercommerce/search/view/search_page.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -291,7 +292,7 @@ class _HomeState extends State<Home> {
               context,
               PageTransition(
                 type: PageTransitionType.fade,
-                child: Search(),
+                child: SearchPage(),
               ),
             );
           },
@@ -427,7 +428,7 @@ class _HomeState extends State<Home> {
                 context,
                 PageTransition(
                   type: PageTransitionType.fade,
-                  child: Search(),
+                  child: SearchPage(),
                 ),
               );
             },

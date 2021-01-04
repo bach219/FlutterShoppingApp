@@ -42,15 +42,18 @@ class _ListSellProductState extends State<ListSellProduct> {
                     scrollDirection: Axis.horizontal,
                     itemCount: listSell.length,
                     itemBuilder: (context, int index) {
+                      print(listSell[index].id+ "list sellllllllllllllllllllllllllllll");
                       return TrendingItem(
                         product: Product(
-                            company: listSell[index].company,
-                            name: listSell[index].name,
-                            icon: listSell[index].icon,
-                            rating: 4.5,
-                            remainingQuantity:
-                                listSell[index].remainingQuantity,
-                            price: listSell[index].price),
+                          id: listSell[index].id,
+                          company: listSell[index].company,
+                          name: listSell[index].name,
+                          icon: listSell[index].icon,
+                          rating: 4.5,
+                          remainingQuantity: listSell[index].remainingQuantity,
+                          price: listSell[index].price,
+                          sale: listSell[index].sale,
+                        ),
                         gradientColors: [Color(0XFFa466ec), Colors.purple[400]],
                       );
                     },

@@ -66,9 +66,9 @@ class ListProductBloc extends Bloc<ListProductEvent, ListProductState> {
     if (response.statusCode == 200) {
       final body = json.decode(response.body) as List;
       return body.map((dynamic json) {
-        print(json);
+        // print(json);
         return Product(
-          id: json['prod_id'].toString(),
+          id: json['product_id'].toString(),
           company: json['cate_name'] as String,
           name: json['prod_name'] as String,
           icon: json['prod_img'] as String,
@@ -76,6 +76,7 @@ class ListProductBloc extends Bloc<ListProductEvent, ListProductState> {
           price: double.parse(json['prod_price'].toString()),
           remainingQuantity: json['prod_qty'] as int,
           description: json['prod_name'] as String,
+          sale: double.parse(json['prod_sale'].toString()),
         );
       }).toList();
     }

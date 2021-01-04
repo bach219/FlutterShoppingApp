@@ -21,7 +21,7 @@ class _FiltreState extends State<Filtre> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text("Reset"),
-              Text("Filters"),
+              Text("Danh mục"),
             ],
           ),
           Padding(
@@ -190,6 +190,7 @@ class _FiltreState extends State<Filtre> {
 
   Padding buildChip(
       String label, Color color, String avatarTitle, Color textColor) {
+    bool onSelected = false;
     return Padding(
       padding: const EdgeInsets.only(top: 2.0, right: 2.0, left: 2.0),
       child: FilterChip(
@@ -203,6 +204,17 @@ class _FiltreState extends State<Filtre> {
           side: BorderSide(color: color),
         ),
         onSelected: (bool value) {
+          setState(() {
+            onSelected = !onSelected;
+            if (onSelected) {
+              color = Theme.of(context).primaryColor;
+              print("selected");
+            }
+            if(!onSelected){
+              color = Theme.of(context).primaryColor;
+              print("unselected");
+            }
+          });
           print("selected");
         },
       ),

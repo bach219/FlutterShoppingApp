@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttercommerce/models/product.dart';
-import 'package:fluttercommerce/screens/product.dart';
+import 'package:fluttercommerce/product_detail/view/product_detail_view/product_detail_page.dart';
 import 'package:fluttercommerce/utils/navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttercommerce/home/bloc/best_sell_phone_bloc/best_sell_phone.dart';
@@ -39,8 +39,9 @@ class _BestSellPhoneState extends State<BestSellPhone> {
             onTap: () {
               Nav.route(
                   context,
-                  ProductPage(
+                  ProductDetailPage(
                     product: Product(
+                      id: bestSell.id,
                       company: bestSell.company,
                       name: bestSell.name,
                       icon: bestSell.icon,
@@ -166,8 +167,11 @@ class _BestSellPhoneState extends State<BestSellPhone> {
                                         padding:
                                             const EdgeInsets.only(top: 4.0),
                                         child: Text(
-                                          NumberFormat.currency(locale: 'vi')
-                                              .format((bestSell.price)),
+                                          bestSell.sale > 0
+                                              ? NumberFormat.currency(
+                                                      locale: 'vi')
+                                                  .format((bestSell.price))
+                                              : "",
                                           overflow: TextOverflow.fade,
                                           maxLines: 1,
                                           softWrap: false,

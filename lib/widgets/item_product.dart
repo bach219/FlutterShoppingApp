@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_icons/ionicons.dart';
 import 'package:fluttercommerce/models/product.dart';
-import 'package:fluttercommerce/screens/product.dart';
+import 'package:fluttercommerce/product_detail/view/product_detail_view/product_detail_page.dart';
+// import 'package:fluttercommerce/screens/product.dart';
 import 'package:fluttercommerce/widgets/star_rating.dart';
 import 'package:intl/intl.dart';
+import 'package:hive/hive.dart';
 
 class TrendingItem extends StatelessWidget {
   final Product product;
@@ -46,14 +48,20 @@ class TrendingItem extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () {
+      onTap: () async {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => ProductPage(
+            builder: (context) => ProductDetailPage(
               product: product,
             ),
           ),
         );
+        await Hive.openBox('Box');
+        var box = Hive.box('Box');
+        box.put('idDetail', product.id);
+        // box.put('idDetail', product.id);
+        // var id = box.get('idDetail');
+        print("${product.id} itemproduct");
       },
     );
   }
@@ -101,20 +109,24 @@ class TrendingItem extends StatelessWidget {
         StarRating(rating: product.rating, size: 10),
         Row(
           children: <Widget>[
-            Text(NumberFormat.currency(locale: 'vi').format((product.price)),
+            Text(
+                NumberFormat.currency(locale: 'vi')
+                    .format((product.price * (1 - product.sale / 100))),
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.red)),
           ],
         ),
-        Text(
-          NumberFormat.currency(locale: 'vi').format((product.price)),
-          style: TextStyle(
-              color: Colors.grey,
-              fontSize: 10,
-              decoration: TextDecoration.lineThrough),
-        ),
+        product.sale > 0.0
+            ? Text(
+                NumberFormat.currency(locale: 'vi').format((product.price)),
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 10,
+                    decoration: TextDecoration.lineThrough),
+              )
+            : Text(''),
       ],
     );
   }

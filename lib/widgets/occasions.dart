@@ -3,6 +3,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttercommerce/utils/navigator.dart';
 import 'package:fluttercommerce/widgets/star_rating.dart';
 import 'package:fluttercommerce/screens/product.dart';
+import 'package:fluttercommerce/product_detail/view/product_detail_view/product_detail_page.dart';
 
 import '../models/product.dart';
 
@@ -13,7 +14,7 @@ class Occasions extends StatelessWidget {
       onTap: () {
         Nav.route(
             context,
-            ProductPage(
+            ProductDetailPage(
               product: Product(
                   company: 'Apple',
                   name: 'iPhone 7 plus (128GB)',

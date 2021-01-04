@@ -6,7 +6,7 @@ import 'package:fluttercommerce/screens/product.dart';
 import 'package:fluttercommerce/utils/navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttercommerce/home/bloc/best_expensive_phone_bloc/best_expensive_phone.dart';
-
+import 'package:fluttercommerce/product_detail/view/product_detail_view/product_detail_page.dart';
 import 'package:fluttercommerce/widgets/star_rating.dart';
 import 'package:intl/intl.dart';
 
@@ -40,8 +40,9 @@ class _BestExpensivePhoneState extends State<BestExpensivePhone> {
             onTap: () {
               Nav.route(
                   context,
-                  ProductPage(
+                  ProductDetailPage(
                     product: Product(
+                      id: bestExpensive.id,
                       company: bestExpensive.company,
                       name: bestExpensive.name,
                       icon: bestExpensive.icon,
