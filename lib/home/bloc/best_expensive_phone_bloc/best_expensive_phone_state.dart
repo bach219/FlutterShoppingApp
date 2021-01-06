@@ -1,6 +1,6 @@
 part of 'best_expensive_phone_bloc.dart';
 
-enum BestExpensivePhoneStatus { initial, failure }
+enum BestExpensivePhoneStatus { initial, failure, success }
 
 class BestExpensivePhoneState extends Equatable {
   const BestExpensivePhoneState({

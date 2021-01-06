@@ -27,7 +27,7 @@ class _ListFunctionalityState extends State<ListFunctionality> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 300), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       widget1Opacity = 1;
     });
   }
@@ -40,6 +40,11 @@ class _ListFunctionalityState extends State<ListFunctionality> {
         case ListFunctionalityStatus.failure:
           return LoginPage();
         case ListFunctionalityStatus.initial:
+          return Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 11,
+              child: Center(child: Image.asset("assets/Spinner.gif")));
+        case ListFunctionalityStatus.success:
           List<String> listFunctionality = [];
           listFunctionality.add("Trọn bộ");
           state.listFunctionality.map((func) {

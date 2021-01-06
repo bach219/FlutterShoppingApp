@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttercommerce/models/product.dart';
-import 'package:fluttercommerce/screens/product.dart';
+import 'package:hive/hive.dart';
 import 'package:fluttercommerce/utils/navigator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttercommerce/home/bloc/best_expensive_phone_bloc/best_expensive_phone.dart';
@@ -21,7 +21,7 @@ class _BestExpensivePhoneState extends State<BestExpensivePhone> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(Duration(milliseconds: 700), () {
       widget1Opacity = 1;
     });
   }
@@ -34,31 +34,27 @@ class _BestExpensivePhoneState extends State<BestExpensivePhone> {
         case BestExpensivePhoneStatus.failure:
           return const Center(child: CircularProgressIndicator());
         case BestExpensivePhoneStatus.initial:
+          return Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 11,
+              child: Center(child: Image.asset("assets/Spinner.gif")));
+        case BestExpensivePhoneStatus.success:
           Product bestExpensive = state.bestExpensive;
-          // print(state.bestExpensive.toString() + "Viewwwwwwwwwwwwwwwwwwwwwwww");
+          // print(state.bestExpensive.toString() + "bestExpensive");
           return InkWell(
-            onTap: () {
-              Nav.route(
-                  context,
-                  ProductDetailPage(
-                    product: Product(
-                      id: bestExpensive.id,
-                      company: bestExpensive.company,
-                      name: bestExpensive.name,
-                      icon: bestExpensive.icon,
-                      rating: 5.0,
-                      remainingQuantity: bestExpensive.remainingQuantity,
-                      price: bestExpensive.price,
-                      sale: bestExpensive.sale,
-                    ),
-                  ));
+            onTap: () async {
+              Nav.route(context, ProductDetailPage());
+              await Hive.openBox('Box');
+              var box = Hive.box('Box');
+              box.put('idDetail', bestExpensive.id);
+              box.put('companyDetail', bestExpensive.company);
             },
             child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 250,
                 child: AnimatedOpacity(
                   opacity: widget1Opacity,
-                  duration: Duration(seconds: 1),
+                  duration: Duration(seconds: 3),
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Card(

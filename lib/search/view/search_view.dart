@@ -10,6 +10,7 @@ import 'package:fluttercommerce/widgets/star_rating.dart';
 import 'package:fluttercommerce/home/home.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:fluttercommerce/product_detail/view/product_detail_view/product_detail_page.dart';
+import 'package:hive/hive.dart';
 
 class Search extends StatefulWidget {
   Search({Key key}) : super(key: key);
@@ -31,7 +32,7 @@ class _SearchState extends State<Search> {
       switch (state.status) {
         case SearchStatus.initial:
           List<String> listImage = [];
-          state.listImage.map((e) => listImage.add(e));
+          listImage = state.listImage.map((e) => (e)).toList();
           return Scaffold(
             body: Container(
               padding: EdgeInsets.only(
@@ -243,27 +244,18 @@ class _SearchState extends State<Search> {
                                         ),
                                       ),
                                     ),
-                                    onTap: () {
+                                    onTap: () async {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              ProductDetailPage(
-                                            product: Product(
-                                              id: listSearch[pos].id,
-                                              company: listSearch[pos].company,
-                                              name: listSearch[pos].name,
-                                              icon: listSearch[pos].icon,
-                                              rating: 5.0,
-                                              price: listSearch[pos].price,
-                                              remainingQuantity: listSearch[pos]
-                                                  .remainingQuantity,
-                                              description:
-                                                  listSearch[pos].description,
-                                              sale: listSearch[pos].sale,
-                                            ),
-                                          ),
+                                              ProductDetailPage(),
                                         ),
                                       );
+                                      await Hive.openBox('Box');
+                                      var box = Hive.box('Box');
+                                      box.put('idDetail', listSearch[pos].id);
+                                      box.put('companyDetail',
+                                          listSearch[pos].company);
                                     },
                                   );
                                 },

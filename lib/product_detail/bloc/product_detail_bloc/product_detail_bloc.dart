@@ -43,9 +43,11 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
         await Hive.openBox('Box');
         var box = Hive.box('Box');
         String id = box.get('idDetail');
+        String company = box.get('companyDetail');
+
         final listImage = await _fetchListImage(id);
         final listComment = await _fetchListComment(id);
-        final listMore = await _fetchListMore(id);
+        final listMore = await _fetchListMore(company);
         final product = await _fetchDetailProduct(id);
         return state.copyWith(
           status: ProductDetailStatus.success,
@@ -107,10 +109,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     throw Exception('error _fetchListComment');
   }
 
-  Future<List<Product>> _fetchListMore(String id) async {
+  Future<List<Product>> _fetchListMore(String company) async {
     print("_fetchListMore");
     var data = await UserRepository().getToken();
-    Map<String, String> map = {"id": id};
+    Map<String, String> map = {"company": company};
     map.addAll(data);
     final response = await CallApi().postData(map, "getMore");
     if (response.statusCode == 200) {
@@ -146,16 +148,21 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
       // print("body_fetchDetailProduct: $body");
       Product product = Product.empty;
       product = Product(
-        id: body[0]['prod_id'].toString(),
-        company: body[0]['cate_name'] as String,
-        name: body[0]['prod_name'] as String,
-        icon: body[0]['prod_img'] as String,
-        rating: 5.0,
-        price: double.parse(body[0]['prod_price'].toString()),
-        remainingQuantity: body[0]['prod_qty'] as int,
-        description: body[0]['prod_description'] as String,
-        sale: double.parse(body[0]['prod_sale'].toString()),
-      );
+          id: body[0]['prod_id'].toString(),
+          company: body[0]['cate_name'] as String,
+          name: body[0]['prod_name'] as String,
+          icon: body[0]['prod_img'] as String,
+          rating: 5.0,
+          price: double.parse(body[0]['prod_price'].toString()),
+          remainingQuantity: body[0]['prod_qty'] as int,
+          description: body[0]['prod_description'] as String,
+          sale: double.parse(body[0]['prod_sale'].toString()),
+          ram: body[0]['prod_ram'].toString(),
+          hardDrive: body[0]['prod_hardDrive'].toString(),
+          accessories: body[0]['prod_accessories'].toString(),
+          warranty: body[0]['prod_warranty'].toString(),
+          promotion: body[0]['prod_promotion'].toString(),
+          );
       return product;
     }
     throw Exception('error fetching _fetchDetailProduct');

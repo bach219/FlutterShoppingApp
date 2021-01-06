@@ -12,17 +12,7 @@ class Occasions extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Nav.route(
-            context,
-            ProductDetailPage(
-              product: Product(
-                  company: 'Apple',
-                  name: 'iPhone 7 plus (128GB)',
-                  icon: 'assets/iphone_7.png',
-                  rating: 4.5,
-                  remainingQuantity: 5,
-                  price: 2000),
-            ));
+        Nav.route(context, ProductDetailPage());
       },
       child: Container(
         width: MediaQuery.of(context).size.width,

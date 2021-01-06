@@ -1,6 +1,6 @@
 part of 'list_new_product_bloc.dart';
 
-enum ListProductStatus { initial, failure }
+enum ListProductStatus { initial, failure, success }
 
 class ListProductState extends Equatable {
   const ListProductState({

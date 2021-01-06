@@ -47,6 +47,12 @@ class _ProductListState extends State<ProductList> {
         case ListProductStatus.failure:
           return const Center(child: CircularProgressIndicator());
         case ListProductStatus.initial:
+          return Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 11,
+              child: Center(child: Image.asset("assets/Spinner.gif")));
+        case ListProductStatus.success:
           List<Product> listNew = [];
           state.listNew.map((func) {
             listNew.add(func);
@@ -151,6 +157,7 @@ class _ProductListState extends State<ProductList> {
                       return Center(
                           child: TrendingItem(
                         product: Product(
+                            id: listNew[index].id,
                             company: listNew[index].company,
                             name: listNew[index].name,
                             icon: listNew[index].icon,

@@ -39,7 +39,7 @@ class BestSellPhoneBloc extends Bloc<BestSellPhoneEvent, BestSellPhoneState> {
       if (state.status == BestSellPhoneStatus.initial) {
         final bestSell = await _fetchBestSellProduct();
         return state.copyWith(
-          status: BestSellPhoneStatus.initial,
+          status: BestSellPhoneStatus.success,
           bestSell: bestSell,
         );
       }

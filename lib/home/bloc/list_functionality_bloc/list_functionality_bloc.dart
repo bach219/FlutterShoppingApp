@@ -45,7 +45,7 @@ class ListFunctionalityBloc
       if (state.status == ListFunctionalityStatus.initial) {
         final listFunctionality = await _fetchListFunction();
         return state.copyWith(
-          status: ListFunctionalityStatus.initial,
+          status: ListFunctionalityStatus.success,
           listFunctionality: listFunctionality,
         );
       }

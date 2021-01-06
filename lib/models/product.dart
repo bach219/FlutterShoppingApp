@@ -11,30 +11,43 @@ class Product extends Equatable {
   final double price;
   final int remainingQuantity;
   final String description;
+  final String ram;
+  final String hardDrive;
+  final String warranty;
+  final String accessories;
+  final String promotion;
 
-  const Product({
-    this.company,
-    this.name,
-    this.icon,
-    this.rating,
-    this.price,
-    this.remainingQuantity,
-    this.description,
-    this.id,
-    this.sale,
-  });
+  const Product(
+      {this.company,
+      this.name,
+      this.icon,
+      this.rating,
+      this.price,
+      this.remainingQuantity,
+      this.description,
+      this.id,
+      this.sale,
+      this.hardDrive,
+      this.accessories,
+      this.warranty,
+      this.ram,
+      this.promotion});
 
   static const empty = Product(
-    sale: 0.0,
-    id: '',
-    company: '',
-    name: '',
-    icon: '',
-    rating: 0.0,
-    price: 0.0,
-    remainingQuantity: 0,
-    description: '',
-  );
+      sale: 0.0,
+      id: '',
+      company: '',
+      name: '',
+      icon: '',
+      rating: 0.0,
+      price: 0.0,
+      remainingQuantity: 0,
+      description: '',
+      ram: '',
+      hardDrive: '',
+      accessories: '',
+      warranty: '',
+      promotion: '');
   @override
   List<Object> get props => [
         company,
@@ -45,7 +58,12 @@ class Product extends Equatable {
         remainingQuantity,
         description,
         sale,
-        price
+        price,
+        ram,
+        hardDrive,
+        accessories,
+        warranty,
+        promotion
       ];
   @override
   String toString() {

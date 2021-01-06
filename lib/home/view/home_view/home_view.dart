@@ -52,6 +52,13 @@ class _HomeState extends State<Home> {
             // return const Center(child: Text('failed to fetch posts'));
             return const Center(child: CircularProgressIndicator());
           case HomeStatus.initial:
+            return Container(
+                color: Colors.white,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 11,
+                child: Center(child: Image.asset("assets/Spinner.gif")));
+          case HomeStatus.success:
+            client = state.client;
             return DefaultTabController(
               length: 4,
               child: Scaffold(
@@ -278,11 +285,11 @@ class _HomeState extends State<Home> {
           icon: new Icon(MaterialCommunityIcons.getIconData("menu"),
               color: Colors.black),
           onPressed: () async {
-            User getClient = await UserRepository().getUser();
-            setState(() {
-              client = getClient;
-              // print(client.name);
-            });
+            // User getClient = await UserRepository().getUser();
+            // setState(() {
+            //   client = getClient;
+            //   // print(client.name);
+            // });
             _scaffoldKey.currentState.openDrawer();
           }),
       actions: <Widget>[

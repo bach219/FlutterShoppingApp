@@ -16,7 +16,7 @@ class _ListSellProductState extends State<ListSellProduct> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       widget1Opacity = 1;
     });
   }
@@ -27,22 +27,29 @@ class _ListSellProductState extends State<ListSellProduct> {
         builder: (context, state) {
       switch (state.status) {
         case ListProductStatus.initial:
+          return Container(
+              // color: Color(0xFFECEDF1),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 11,
+              child: Center(child: Image.asset("assets/Spinner.gif")));
+        case ListProductStatus.success:
           List<Product> listSell = [];
           state.listSell.map((func) {
             listSell.add(func);
           }).toList();
-          return Column(
-            children: <Widget>[
-              Container(
-                height: 200,
-                child: AnimatedOpacity(
-                  opacity: widget1Opacity,
-                  duration: Duration(seconds: 3),
+          return AnimatedOpacity(
+            opacity: widget1Opacity,
+            duration: Duration(seconds: 3),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 200,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: listSell.length,
                     itemBuilder: (context, int index) {
-                      print(listSell[index].id+ "list sellllllllllllllllllllllllllllll");
+                      // print(listSell[index].id +
+                      //     "list sellllllllllllllllllllllllllllll");
                       return TrendingItem(
                         product: Product(
                           id: listSell[index].id,
@@ -58,9 +65,10 @@ class _ListSellProductState extends State<ListSellProduct> {
                       );
                     },
                   ),
-                ),
-              )
-            ],
+                  // ),
+                )
+              ],
+            ),
           );
         case ListProductStatus.failure:
           return const Center(child: CircularProgressIndicator());

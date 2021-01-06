@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_icons/ionicons.dart';
 import 'package:fluttercommerce/models/product.dart';
 import 'package:fluttercommerce/product_detail/view/product_detail_view/product_detail_page.dart';
-// import 'package:fluttercommerce/screens/product.dart';
 import 'package:fluttercommerce/widgets/star_rating.dart';
 import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
@@ -51,17 +50,13 @@ class TrendingItem extends StatelessWidget {
       onTap: () async {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => ProductDetailPage(
-              product: product,
-            ),
+            builder: (context) => ProductDetailPage(),
           ),
         );
         await Hive.openBox('Box');
         var box = Hive.box('Box');
         box.put('idDetail', product.id);
-        // box.put('idDetail', product.id);
-        // var id = box.get('idDetail');
-        print("${product.id} itemproduct");
+        box.put('companyDetail', product.company);
       },
     );
   }

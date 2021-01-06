@@ -40,7 +40,7 @@ class ListProductBloc extends Bloc<ListProductEvent, ListProductState> {
       if (state.status == ListProductStatus.initial) {
         final listSell = await _fetchListNew();
         return state.copyWith(
-          status: ListProductStatus.initial,
+          status: ListProductStatus.success,
           listSell: listSell,
         );
       }

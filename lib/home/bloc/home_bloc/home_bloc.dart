@@ -39,7 +39,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (state.status == HomeStatus.initial) {
         final client = await _fetchClient();
         return state.copyWith(
-          status: HomeStatus.initial,
+          status: HomeStatus.success,
           client: client,
         );
       }

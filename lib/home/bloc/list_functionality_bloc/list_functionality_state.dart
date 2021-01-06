@@ -1,6 +1,6 @@
 part of 'list_functionality_bloc.dart';
 
-enum ListFunctionalityStatus { initial, failure }
+enum ListFunctionalityStatus { initial, failure, success }
 
 class ListFunctionalityState extends Equatable {
   const ListFunctionalityState({

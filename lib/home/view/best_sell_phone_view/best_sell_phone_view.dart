@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttercommerce/home/bloc/best_sell_phone_bloc/best_sell_phone.dart';
 import 'package:fluttercommerce/widgets/star_rating.dart';
 import 'package:intl/intl.dart';
+import 'package:hive/hive.dart';
 
 class BestSellPhone extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _BestSellPhoneState extends State<BestSellPhone> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       widget1Opacity = 1;
     });
   }
@@ -33,31 +34,27 @@ class _BestSellPhoneState extends State<BestSellPhone> {
         case BestSellPhoneStatus.failure:
           return const Center(child: CircularProgressIndicator());
         case BestSellPhoneStatus.initial:
+          return Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 11,
+              child: Center(child: Image.asset("assets/Spinner.gif")));
+        case BestSellPhoneStatus.success:
           Product bestSell = state.bestSell;
           // print(state.bestSell.toString() + "Viewwwwwwwwwwwwwwwwwwwwwwww");
           return InkWell(
-            onTap: () {
-              Nav.route(
-                  context,
-                  ProductDetailPage(
-                    product: Product(
-                      id: bestSell.id,
-                      company: bestSell.company,
-                      name: bestSell.name,
-                      icon: bestSell.icon,
-                      rating: 5.0,
-                      remainingQuantity: bestSell.remainingQuantity,
-                      price: bestSell.price,
-                      sale: bestSell.sale,
-                    ),
-                  ));
+            onTap: () async {
+              Nav.route(context, ProductDetailPage());
+              await Hive.openBox('Box');
+              var box = Hive.box('Box');
+              box.put('idDetail', bestSell.id);
+              box.put('companyDetail', bestSell.company);
             },
             child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 250,
                 child: AnimatedOpacity(
                   opacity: widget1Opacity,
-                  duration: Duration(seconds: 1),
+                  duration: Duration(seconds: 3),
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Card(

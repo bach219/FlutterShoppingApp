@@ -43,7 +43,7 @@ class BestExpensivePhoneBloc
       if (state.status == BestExpensivePhoneStatus.initial) {
         final bestExpensive = await _fetchBestExpensiveProduct();
         return state.copyWith(
-          status: BestExpensivePhoneStatus.initial,
+          status: BestExpensivePhoneStatus.success,
           bestExpensive: bestExpensive,
         );
       }
@@ -54,7 +54,7 @@ class BestExpensivePhoneBloc
   }
 
   Future<Product> _fetchBestExpensiveProduct() async {
-    print("bestExpensiveProduct");
+    // print("bestExpensiveProduct");
     var data = await UserRepository().getToken();
     // print("token:     $data");
     final response = await CallApi().postData(data, "bestExpensiveProduct");

@@ -16,7 +16,7 @@ class _ListNewProductState extends State<ListNewProduct> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       widget1Opacity = 1;
     });
   }
@@ -27,6 +27,11 @@ class _ListNewProductState extends State<ListNewProduct> {
         builder: (context, state) {
       switch (state.status) {
         case ListProductStatus.initial:
+          return Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height / 11,
+              child: Center(child: Image.asset("assets/Spinner.gif")));
+        case ListProductStatus.success:
           List<Product> listNew = [];
           state.listNew.map((func) {
             listNew.add(func);
