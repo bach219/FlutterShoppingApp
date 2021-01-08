@@ -167,7 +167,8 @@ class _LoginButton extends StatelessWidget {
         buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {
           return state.status.isSubmissionInProgress
-              ? const CircularProgressIndicator()
+              ? const CircularProgressIndicator(
+                  backgroundColor: Color(0xFFDBCC8F), valueColor: AlwaysStoppedAnimation<Color>(Colors.white),)
               : Container(
                   child: Padding(
                     padding: const EdgeInsets.only(

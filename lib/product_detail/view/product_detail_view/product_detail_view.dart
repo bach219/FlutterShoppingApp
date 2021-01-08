@@ -18,6 +18,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fluttercommerce/product_list/view/product_list_view.dart';
 import 'package:fluttercommerce/cart/bloc/cart.dart';
 import 'package:fluttercommerce/cart/view/cart_view.dart';
+import 'package:fluttercommerce/cart/models/models.dart';
+import 'package:hive/hive.dart';
 
 class ProductPage extends StatefulWidget {
   final Product product;
@@ -40,6 +42,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     super.initState();
+    // Hive.registerAdapter<Item>(ItemAdapter());
     Future.delayed(Duration(milliseconds: 100), () {
       widget1Opacity = 1;
     });
@@ -781,16 +784,18 @@ class AddItem extends StatelessWidget {
               // setState(() {
               //   isClicked = !isClicked;
               // });
-              context.read<CartBloc>().add(CartItemAdded(Product(
-                    id: product.id,
-                    company: product.company,
-                    name: product.name,
-                    icon: product.icon,
-                    rating: 4.5,
-                    remainingQuantity: product.remainingQuantity,
-                    price: product.price,
-                    sale: product.sale,
-                  )));
+              context.read<CartBloc>().add(CartItemAdded(Item(
+                  //       product: Product(
+                  id: product.id,
+                  company: product.company,
+                  name: product.name,
+                  icon: product.icon,
+                  rating: 4.5,
+                  remainingQuantity: product.remainingQuantity,
+                  price: product.price,
+                  sale: product.sale,
+                  // ),
+                  qty: 1)));
             },
             textColor: Colors.white,
             padding: const EdgeInsets.all(0.0),
@@ -881,11 +886,12 @@ class AddItem extends StatelessWidget {
             "Xem giỏ",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ShoppingCart(true),
-            ),
-          ),
+            ));
+            Navigator.of(context, rootNavigator: true).pop();
+          },
           // Navigator.push(
           //   context,
           //   PageTransition(

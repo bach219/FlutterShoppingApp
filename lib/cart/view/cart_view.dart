@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/ionicons.dart';
+import 'package:fluttercommerce/cart/models/models.dart';
 import 'package:fluttercommerce/utils/navigator.dart';
 import 'package:fluttercommerce/screens/screens.dart';
 import 'package:fluttercommerce/cart/bloc/cart.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:hive/hive.dart';
+import 'package:fluttercommerce/product_detail/view/product_detail_view/product_detail_page.dart';
 
 // ignore: must_be_immutable
 class ShoppingCart extends StatefulWidget {
@@ -30,7 +35,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     color: Colors.black),
                 onPressed: () => Navigator.pop(context),
               ),
-              backgroundColor: Colors.white,
+              backgroundColor: Color(0xFFDBCC8F),
             )
           : null,
       body: Container(
@@ -48,7 +53,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4.0),
                   ),
-                  color: Colors.blueGrey,
+                  color: Color(0xFFDBCC8F),
                   onPressed: () => {Nav.route(context, Checkout())},
                   child: Container(
                     padding: EdgeInsets.symmetric(
@@ -63,7 +68,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                             "Đặt hàng",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -89,9 +94,10 @@ class _CartList extends StatelessWidget {
           return const CircularProgressIndicator();
         }
         if (state is CartLoaded) {
+          // print(state.cart.items);
           return Container(
               padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-              height: 220,
+              // height: 220,
               child: SingleChildScrollView(
                   child: Column(children: <Widget>[
                 ListView.builder(
@@ -108,7 +114,13 @@ class _CartList extends StatelessWidget {
                               width: (MediaQuery.of(context).size.width) / 3,
                               child: Column(
                                 children: <Widget>[
-                                  Image.asset('assets/raf.jpg'),
+                                  FadeInImage.assetNetwork(
+                                    placeholder: "assets/Spinner.gif",
+                                    image:
+                                        "http://192.168.100.18/AppStore/public/layout/images/avatar/${state.cart.items[pos].icon}",
+                                    fit: BoxFit.fitHeight,
+                                    height: 150,
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
@@ -122,11 +134,36 @@ class _CartList extends StatelessWidget {
                                             // setState(() {
                                             //   shoppingCartCount--;
                                             // });
+                                            context.read<CartBloc>().add(
+                                                CartItemSubUpdated(Item(
+                                                    id: state
+                                                        .cart.items[pos].id,
+                                                    company: state.cart
+                                                        .items[pos].company,
+                                                    name: state
+                                                        .cart.items[pos].name,
+                                                    icon: state
+                                                        .cart.items[pos].icon,
+                                                    rating: 4.5,
+                                                    remainingQuantity: state
+                                                        .cart
+                                                        .items[pos]
+                                                        .remainingQuantity,
+                                                    price: state
+                                                        .cart.items[pos].price,
+                                                    sale: state
+                                                        .cart.items[pos].sale,
+                                                    qty: state
+                                                        .cart.items[pos].qty)));
                                           },
                                         ),
                                         Text(
-                                          'fsdfdvvcshoppingCartCount',
-                                          style: TextStyle(fontSize: 18),
+                                          // 'fsdfdvvcshoppingCartCount',
+                                          state.cart.items[pos].qty.toString(),
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         IconButton(
                                           icon: Icon(Icons.add_circle_outline),
@@ -134,6 +171,27 @@ class _CartList extends StatelessWidget {
                                             // setState(() {
                                             //   shoppingCartCount++;
                                             // });
+                                            context.read<CartBloc>().add(
+                                                CartItemAddUpdated(Item(
+                                                    id: state
+                                                        .cart.items[pos].id,
+                                                    company: state.cart
+                                                        .items[pos].company,
+                                                    name: state
+                                                        .cart.items[pos].name,
+                                                    icon: state
+                                                        .cart.items[pos].icon,
+                                                    rating: 4.5,
+                                                    remainingQuantity: state
+                                                        .cart
+                                                        .items[pos]
+                                                        .remainingQuantity,
+                                                    price: state
+                                                        .cart.items[pos].price,
+                                                    sale: state
+                                                        .cart.items[pos].sale,
+                                                    qty: state
+                                                        .cart.items[pos].qty)));
                                           },
                                         ),
                                       ],
@@ -168,7 +226,28 @@ class _CartList extends StatelessWidget {
                                           Icons.close,
                                           size: 26,
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          context.read<CartBloc>().add(
+                                              CartItemDeleted(Item(
+                                                  id: state.cart.items[pos].id,
+                                                  company: state
+                                                      .cart.items[pos].company,
+                                                  name: state
+                                                      .cart.items[pos].name,
+                                                  icon: state
+                                                      .cart.items[pos].icon,
+                                                  rating: 4.5,
+                                                  remainingQuantity: state
+                                                      .cart
+                                                      .items[pos]
+                                                      .remainingQuantity,
+                                                  price: state
+                                                      .cart.items[pos].price,
+                                                  sale: state
+                                                      .cart.items[pos].sale,
+                                                  qty: state
+                                                      .cart.items[pos].qty)));
+                                        },
                                       ),
                                     ],
                                   ),
@@ -181,18 +260,65 @@ class _CartList extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.all(12.0),
                                           child: Text(
-                                            "\$ 2.500",
+                                            NumberFormat.currency(locale: 'vi')
+                                                .format((state
+                                                        .cart.items[pos].price *
+                                                    (1 -
+                                                        state.cart.items[pos]
+                                                                .sale /
+                                                            100))),
                                             style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.red),
                                           ),
                                         ),
+                                        state.cart.items[pos].sale > 0
+                                            ? Padding(
+                                                padding:
+                                                    const EdgeInsets.all(12.0),
+                                                child: Text(
+                                                  NumberFormat.currency(
+                                                          locale: 'vi')
+                                                      .format((state.cart
+                                                          .items[pos].price)),
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      decoration: TextDecoration
+                                                          .lineThrough),
+                                                ),
+                                              )
+                                            : Padding(
+                                                padding:
+                                                    const EdgeInsets.all(12.0),
+                                              ),
                                         Padding(
                                           padding: const EdgeInsets.all(12.0),
-                                          child: Text(
-                                            "Chi tiết sản phẩm",
-                                            style:
-                                                TextStyle(color: Colors.blue),
+                                          child: GestureDetector(
+                                            onTap: () async {
+                                              Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child: ProductDetailPage(),
+                                                ),
+                                              );
+                                              await Hive.openBox('Box');
+                                              var box = Hive.box('Box');
+                                              box.put('idDetail',
+                                                  state.cart.items[pos].id);
+                                              box.put(
+                                                  'companyDetail',
+                                                  state
+                                                      .cart.items[pos].company);
+                                            },
+                                            child: Text(
+                                              "Chi tiết sản phẩm",
+                                              style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.blue),
+                                              textAlign: TextAlign.end,
+                                            ),
                                           ),
                                         ),
                                       ],
@@ -234,7 +360,8 @@ class _CartTotal extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text("Tiền hàng"),
-                        Text("\$278.78"),
+                        Text(NumberFormat.currency(locale: 'vi')
+                            .format((state.cart.totalPrice))),
                       ],
                     ),
                   ),
@@ -245,7 +372,8 @@ class _CartTotal extends StatelessWidget {
                       children: <Widget>[
                         Text("Thuế VAT"),
                         Text(
-                          "\$20.00",
+                          NumberFormat.currency(locale: 'vi')
+                              .format((state.cart.totalPrice * 0.1)),
                           style: TextStyle(fontSize: 14),
                         ),
                       ],
@@ -260,7 +388,8 @@ class _CartTotal extends StatelessWidget {
                           "Tổng hóa đơn",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text("\$308.78"),
+                        Text(NumberFormat.currency(locale: 'vi')
+                            .format((state.cart.totalPrice * 1.1))),
                       ],
                     ),
                   ),
@@ -274,109 +403,3 @@ class _CartTotal extends StatelessWidget {
     );
   }
 }
-
-// Container buildShoppingCartItem(BuildContext context) {
-//   return Container(
-//       padding: EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-//       height: 220,
-//       child: SingleChildScrollView(
-//           child: Column(children: <Widget>[
-//         Card(
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceAround,
-//             children: <Widget>[
-//               Container(
-//                 width: (MediaQuery.of(context).size.width) / 3,
-//                 child: Column(
-//                   children: <Widget>[
-//                     Image.asset('assets/raf.jpg'),
-//                     Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                         children: <Widget>[
-//                           IconButton(
-//                             icon: Icon(Icons.remove_circle_outline),
-//                             onPressed: () {
-//                               setState(() {
-//                                 shoppingCartCount--;
-//                               });
-//                             },
-//                           ),
-//                           Text(
-//                             '$shoppingCartCount',
-//                             style: TextStyle(fontSize: 18),
-//                           ),
-//                           IconButton(
-//                             icon: Icon(Icons.add_circle_outline),
-//                             onPressed: () {
-//                               setState(() {
-//                                 shoppingCartCount++;
-//                               });
-//                             },
-//                           ),
-//                         ],
-//                       ),
-//                     )
-//                   ],
-//                 ),
-//               ),
-//               Container(
-//                 width: (MediaQuery.of(context).size.width - 37) / 1.5,
-//                 child: Column(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   crossAxisAlignment: CrossAxisAlignment.end,
-//                   children: <Widget>[
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: <Widget>[
-//                         Container(
-//                           padding: EdgeInsets.only(left: 12.0),
-//                           width: 150,
-//                           child: Text(
-//                             "Philips 42FYHFH45 81 Cm FullHD",
-//                             overflow: TextOverflow.ellipsis,
-//                             maxLines: 2,
-//                           ),
-//                         ),
-//                         IconButton(
-//                           icon: Icon(
-//                             Icons.close,
-//                             size: 26,
-//                           ),
-//                           onPressed: () {},
-//                         ),
-//                       ],
-//                     ),
-//                     Padding(
-//                       padding: const EdgeInsets.all(12.0),
-//                       child: Column(
-//                         crossAxisAlignment: CrossAxisAlignment.end,
-//                         children: <Widget>[
-//                           Padding(
-//                             padding: const EdgeInsets.all(12.0),
-//                             child: Text(
-//                               "\$ 2.500",
-//                               style: TextStyle(
-//                                   fontSize: 16, fontWeight: FontWeight.bold),
-//                             ),
-//                           ),
-//                           Padding(
-//                             padding: const EdgeInsets.all(12.0),
-//                             child: Text(
-//                               "Show Details",
-//                               style: TextStyle(color: Colors.blue),
-//                             ),
-//                           ),
-//                         ],
-//                       ),
-//                     )
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ])));
-// }
-// }

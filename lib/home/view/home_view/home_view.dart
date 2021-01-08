@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttercommerce/authentication/authentication.dart';
-
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttercommerce/screens/products_list.dart';
-import 'package:fluttercommerce/screens/search.dart';
-import 'package:fluttercommerce/screens/shoppingcart.dart';
 import 'package:fluttercommerce/screens/usersettings.dart';
 import 'package:fluttercommerce/screens/whell.dart';
 import 'package:fluttercommerce/utils/constant.dart';
 import 'package:fluttercommerce/utils/navigator.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:fluttercommerce/Repository/repository.dart';
 import 'package:fluttercommerce/screens/screens.dart';
 import 'package:fluttercommerce/home/bloc/home_bloc/home_bloc.dart';
 import '../../home.dart';
@@ -23,6 +19,7 @@ import 'home_page.dart';
 import 'package:fluttercommerce/models/models.dart';
 import 'package:fluttercommerce/product_list/view/product_list_view.dart';
 import 'package:fluttercommerce/search/view/search_page.dart';
+import 'package:fluttercommerce/cart/view/cart_view.dart';
 
 class Home extends StatefulWidget {
   @override

@@ -12,6 +12,7 @@ import 'package:fluttercommerce/widgets/star_rating.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:fluttercommerce/search/view/search_page.dart';
+import 'package:fluttercommerce/cart/view/cart_view.dart';
 
 class ProductPage extends StatefulWidget {
   final Product product;
