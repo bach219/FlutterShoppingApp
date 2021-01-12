@@ -7,7 +7,7 @@ class ProductListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ListProductBloc()..add(DataFetched()),
+      create: (_) => ListProductBloc()..add(ListProductStarted()),
       child: ProductList(),
     );
   }

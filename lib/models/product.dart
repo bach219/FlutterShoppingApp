@@ -31,38 +31,25 @@ class Product extends Equatable {
 
   final String promotion;
 
-  // Map toJson() => {
-  //       'sale': sale,
-  //       'id': id,
-  //       'company': company,
-  //       'name': '',
-  //       'icon': icon,
-  //       'rating': rating,
-  //       'price': price,
-  //       'remainingQuantity': remainingQuantity,
-  //       'description': description,
-  //       'ram': ram,
-  //       'hardDrive': hardDrive,
-  //       'accessories': accessories,
-  //       'warranty': warranty,
-  //       'promotion': promotion
-  //     };
+  final String func;
 
-  const Product(
-      {this.company,
-      this.name,
-      this.icon,
-      this.rating,
-      this.price,
-      this.remainingQuantity,
-      this.description,
-      this.id,
-      this.sale,
-      this.hardDrive,
-      this.accessories,
-      this.warranty,
-      this.ram,
-      this.promotion});
+  const Product({
+    this.company,
+    this.name,
+    this.icon,
+    this.rating,
+    this.price,
+    this.remainingQuantity,
+    this.description,
+    this.id,
+    this.sale,
+    this.hardDrive,
+    this.accessories,
+    this.warranty,
+    this.ram,
+    this.promotion,
+    this.func,
+  });
 
   static const empty = Product(
       sale: 0.0,
@@ -94,7 +81,7 @@ class Product extends Equatable {
         hardDrive,
         accessories,
         warranty,
-        promotion
+        promotion,
       ];
   @override
   String toString() {

@@ -12,7 +12,7 @@ class Cart extends Equatable {
       0,
       (total, current) =>
           total + current.price * (1 - current.sale / 100) * current.qty);
-
+  int get totalLength => items.fold(0, (total, current) => total + current.qty);
   @override
   List<Object> get props => [items];
 }

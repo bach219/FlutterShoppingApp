@@ -491,6 +491,7 @@ class _ProductPageState extends State<ProductPage> {
             Text(
               product.name,
             ),
+            // SingleChildScrollView(child: Html(data: """${product.name}""",)),
             SizedBox(
               height: 8,
             ),
@@ -537,15 +538,10 @@ class _ProductPageState extends State<ProductPage> {
                       fontWeight: FontWeight.w500,
                       color: Colors.black54),
                 ),
-                GestureDetector(
-                  child: Text(
-                    "Bình luận",
-                    style: TextStyle(fontSize: 18.0, color: Colors.blue),
-                    textAlign: TextAlign.end,
-                  ),
-                  onTap: () {
-                    // _settingComment(context);
-                  },
+                Text(
+                  "Bình luận",
+                  style: TextStyle(fontSize: 18.0, color: Colors.blue),
+                  textAlign: TextAlign.end,
                 ),
               ],
             ),
@@ -737,48 +733,6 @@ void _settingModalBottomSheet(context, String description) {
       });
 }
 
-// void _settingComment(context) {
-
-//   showModalBottomSheet(
-//       context: context,
-//       builder: (BuildContext bc) {
-//         return SingleChildScrollView(
-//           child: Container(
-//             width: MediaQuery.of(context).size.width,
-//             child: Container(
-//               padding: EdgeInsets.all(16.0),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                 children: <Widget>[
-//                   Text(
-//                     "Mô tả",
-//                     style: TextStyle(
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.black45,
-//                       fontSize: 18,
-//                     ),
-//                   ),
-//                   SizedBox(
-//                     height: 8,
-//                   ),
-//                   SingleChildScrollView(
-//                       child: Column(children: [
-//                     Html(
-//                       data: """$description""",
-//                     ),
-//                   ])),
-//                   SizedBox(
-//                     height: 8,
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         );
-//       });
-// }
-
 class AddItem extends StatelessWidget {
   final Product product;
 
@@ -796,6 +750,7 @@ class AddItem extends StatelessWidget {
             onPressed: () async {
               alert(context);
               context.read<CartBloc>().add(CartItemAdded(Item(
+                  //       product: Product(
                   id: product.id,
                   company: product.company,
                   name: product.name,
@@ -804,6 +759,7 @@ class AddItem extends StatelessWidget {
                   remainingQuantity: product.remainingQuantity,
                   price: product.price,
                   sale: product.sale,
+                  // ),
                   qty: 1)));
             },
             textColor: Colors.white,

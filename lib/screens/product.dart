@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttercommerce/models/product.dart';
 import 'package:fluttercommerce/screens/search.dart';
-import 'package:fluttercommerce/screens/shoppingcart.dart';
 import 'package:fluttercommerce/screens/usersettings.dart';
 import 'package:fluttercommerce/utils/colors.dart';
 import 'package:fluttercommerce/widgets/dotted_slider.dart';

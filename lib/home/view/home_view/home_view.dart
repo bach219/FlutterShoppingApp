@@ -20,6 +20,7 @@ import 'package:fluttercommerce/models/models.dart';
 import 'package:fluttercommerce/product_list/view/product_list_view.dart';
 import 'package:fluttercommerce/search/view/search_page.dart';
 import 'package:fluttercommerce/cart/view/cart_view.dart';
+import 'package:fluttercommerce/cart/bloc/cart.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -282,11 +283,6 @@ class _HomeState extends State<Home> {
           icon: new Icon(MaterialCommunityIcons.getIconData("menu"),
               color: Colors.black),
           onPressed: () async {
-            // User getClient = await UserRepository().getUser();
-            // setState(() {
-            //   client = getClient;
-            //   // print(client.name);
-            // });
             _scaffoldKey.currentState.openDrawer();
           }),
       actions: <Widget>[
@@ -305,20 +301,25 @@ class _HomeState extends State<Home> {
             color: Colors.black,
           ),
         ),
-        IconButton(
-          icon: Icon(
-            MaterialCommunityIcons.getIconData("cart-outline"),
-          ),
-          color: Colors.black,
-          onPressed: () {
-            Navigator.push(
-              context,
-              PageTransition(
-                type: PageTransitionType.fade,
-                child: ShoppingCart(true),
+        Stack(
+          children: [
+            IconButton(
+              icon: Icon(
+                MaterialCommunityIcons.getIconData("cart-outline"),
               ),
-            );
-          },
+              color: Colors.black,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    type: PageTransitionType.fade,
+                    child: ShoppingCart(true),
+                  ),
+                );
+              },
+            ),
+            Cart()
+          ],
         ),
       ],
       backgroundColor: Color(0xFFDBCC8F),
@@ -476,40 +477,40 @@ class _HomeState extends State<Home> {
               );
             },
           ),
-          ListTile(
-            leading: Icon(Feather.getIconData('list'), color: blackColor),
-            title: Text('My Orders',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: blackColor)),
-            onTap: () {
-              Nav.route(context, ProductList());
-            },
-          ),
-          ListTile(
-            leading: Icon(Feather.getIconData('award'), color: blackColor),
-            title: Text('Points',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: blackColor)),
-            onTap: () {
-              Nav.route(context, Checkout());
-            },
-          ),
-          ListTile(
-            leading:
-                Icon(Feather.getIconData('message-circle'), color: blackColor),
-            title: Text('Support',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: blackColor)),
-            onTap: () {
-              Nav.route(context, ProductList());
-            },
-          ),
+          // ListTile(
+          //   leading: Icon(Feather.getIconData('list'), color: blackColor),
+          //   title: Text('My Orders',
+          //       style: TextStyle(
+          //           fontSize: 16,
+          //           fontWeight: FontWeight.w600,
+          //           color: blackColor)),
+          //   onTap: () {
+          //     Nav.route(context, ProductList());
+          //   },
+          // ),
+          // ListTile(
+          //   leading: Icon(Feather.getIconData('award'), color: blackColor),
+          //   title: Text('Points',
+          //       style: TextStyle(
+          //           fontSize: 16,
+          //           fontWeight: FontWeight.w600,
+          //           color: blackColor)),
+          //   onTap: () {
+          //     Nav.route(context, Checkout());
+          //   },
+          // ),
+          // ListTile(
+          //   leading:
+          //       Icon(Feather.getIconData('message-circle'), color: blackColor),
+          //   title: Text('Support',
+          //       style: TextStyle(
+          //           fontSize: 16,
+          //           fontWeight: FontWeight.w600,
+          //           color: blackColor)),
+          //   onTap: () {
+          //     Nav.route(context, ProductList());
+          //   },
+          // ),
           ListTile(
             leading:
                 Icon(Feather.getIconData('help-circle'), color: blackColor),
@@ -566,5 +567,31 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+}
+
+class Cart extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+      print("state:              $state");
+      if (state is CartLoading) {
+        return const CircularProgressIndicator();
+      }
+      if (state is CartLoaded) {
+        return Positioned(
+            left: 5,
+            bottom: 10,
+            child: state.cart.totalLength > 0
+                ? Text(state.cart.totalLength.toString(),
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        height: 5,
+                        fontSize: 12))
+                : Text(""));
+      }
+      return const Text('Something went wrong!');
+    });
   }
 }

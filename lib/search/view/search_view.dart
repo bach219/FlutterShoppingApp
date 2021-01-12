@@ -11,6 +11,7 @@ import 'package:fluttercommerce/home/home.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:fluttercommerce/product_detail/view/product_detail_view/product_detail_page.dart';
 import 'package:hive/hive.dart';
+import 'package:fluttercommerce/product_list/view/product_list_view.dart';
 
 class Search extends StatefulWidget {
   Search({Key key}) : super(key: key);
@@ -31,8 +32,7 @@ class _SearchState extends State<Search> {
         builder: (context, state) {
       switch (state.status) {
         case SearchStatus.initial:
-          List<String> listImage = [];
-          listImage = state.listImage.map((e) => (e)).toList();
+          List<String> listImage = state.listImage.map((e) => (e)).toList();
           return Scaffold(
             body: Container(
               padding: EdgeInsets.only(
@@ -150,7 +150,7 @@ class _SearchState extends State<Search> {
                                           context,
                                           PageTransition(
                                             type: PageTransitionType.fade,
-                                            child: HomePage(),
+                                            child: ProductListPage(),
                                           ),
                                         );
                                       },

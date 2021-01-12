@@ -29,9 +29,10 @@ class AuthenticationRepository {
     await Hive.openBox('Box');
     var box = Hive.box('Box');
     box.put('token', body['token'].toString());
-    print(body['token']);
+    // print(body['token']);
     box.put('client', json.encode(body['client']).toString());
     box.put('listItem', jsonEncode(<Item>[]).toString());
+
     // box.close();
     if (res.statusCode.toString() == '200')
       await Future.delayed(
@@ -74,6 +75,7 @@ class AuthenticationRepository {
     box.put('token', body['token'].toString());
     box.put('client', json.encode(body['client']).toString());
     box.put('listItem', jsonEncode(<Item>[]).toString());
+
     if (res.statusCode.toString() == '200')
       await Future.delayed(
         const Duration(milliseconds: 300),
@@ -87,7 +89,7 @@ class AuthenticationRepository {
     await Hive.openBox('Box');
     var box = Hive.box('Box');
     String token = box.get('token');
-    print(token);
+    // print(token);
     await CallApi().logOut(token);
     box.deleteFromDisk();
     // box.delete("listItem");

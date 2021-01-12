@@ -23,14 +23,14 @@ class _WhellFortuneState extends State<WhellFortune>
   AnimationController _ctrl;
   Animation _ani;
   List<Luck> _items = [
-    Luck("apple", Color(0xFF9F6083), "10"),
-    Luck("raspberry", Color(0xFFFDB78B), "30"),
-    Luck("grapes", Color(0xFF57CFE2), "45"),
-    Luck("fruit", Color(0xFF606B7E), "75"),
-    Luck("milk", Color(0xFF24ACE9), "150"),
-    Luck("salad", Color(0xFFFB7C7A), "250"),
-    Luck("cheese", Color(0xFF1BD3AC), "500"),
-    Luck("carrot", Color(0xFFa73737), "1000"),
+    Luck("apple", Color(0xFF9F6083), "10K"),
+    Luck("raspberry", Color(0xFFFDB78B), "30K"),
+    Luck("grapes", Color(0xFF57CFE2), "50K"),
+    Luck("fruit", Color(0xFF606B7E), "70K"),
+    Luck("milk", Color(0xFF24ACE9), "100K"),
+    Luck("salad", Color(0xFFFB7C7A), "200K"),
+    Luck("cheese", Color(0xFF1BD3AC), "300K"),
+    Luck("carrot", Color(0xFFa73737), "500K"),
   ];
 
   @override
@@ -70,7 +70,7 @@ class _WhellFortuneState extends State<WhellFortune>
                     child: Padding(
                       padding: const EdgeInsets.only(top: 36.0),
                       child: Text(
-                        "Quick opportunity",
+                        "VÒNG XOAY MAY MẮN",
                         style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
@@ -96,7 +96,7 @@ class _WhellFortuneState extends State<WhellFortune>
           height: 84,
           width: 84,
           child: Text(
-            "START",
+            "QUAY",
             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
           ),
         ),
@@ -139,15 +139,18 @@ class _WhellFortuneState extends State<WhellFortune>
       context: context,
       style: alertStyle,
       type: AlertType.none,
-      title: "Free Points",
-      desc: "You earned points. You can use it in your shopping.",
+      title: "Phần thưởng",
+      desc: "Bạn đã nhận được áp dụng giảm giá cho hóa đơn",
       buttons: [
         DialogButton(
           child: Text(
-            "GO SHOPPING",
+            "Tiếp tục mua sắm",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          onPressed: () => Nav.route(context, HomePage()),
+          onPressed: () {
+            Nav.route(context, HomePage());
+            Navigator.of(context, rootNavigator: true).pop();
+          },
           color: Color.fromRGBO(0, 179, 134, 1.0),
         ),
       ],

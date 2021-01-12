@@ -25,9 +25,15 @@ class ItemRepository {
     }).toList();
   }
 
-  Future<int> getListLength() async {
+  getListLength() async {
+    await Hive.openBox('Box');
+    var box = Hive.box('Box');
     List<Item> listItem = await getListItem();
-    return listItem.length;
+    var lengthCart = listItem.fold(
+      0,
+      (total, current) =>
+          total + current.qty);
+    box.put('lengthCart', lengthCart.toString());
   }
 
   addItemToList(Item item) async {
@@ -52,6 +58,7 @@ class ItemRepository {
     } else
       listItem.add(item);
     box.put('listItem', jsonEncode(listItem).toString());
+    // getListLength();
   }
 
   removeItemFromList(Item item) async {
@@ -61,6 +68,7 @@ class ItemRepository {
     int index = listItem.indexWhere((element) => element.id == item.id);
     listItem.removeAt(index);
     box.put('listItem', jsonEncode(listItem).toString());
+    // getListLength();
   }
 
   updateAddItemToList(Item item) async {
@@ -83,7 +91,7 @@ class ItemRepository {
     }
 
     box.put('listItem', jsonEncode(listItem).toString());
-    print('updateAddItemToList');
+    // getListLength();
   }
 
   updateSubItemToList(Item item) async {
@@ -107,6 +115,6 @@ class ItemRepository {
           qty: qty - 1);
 
     box.put('listItem', jsonEncode(listItem).toString());
-    print('updateSubItemToList');
+    // getListLength();
   }
 }
