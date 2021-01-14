@@ -6,3 +6,4 @@ export 'FunctionalityRepository/func_repository.dart';
 export 'CategoryRepository/category_repository.dart';
 export 'CheckoutRepository/checkout_repository.dart';
 export 'DetailRepository/detail_repository.dart';
+export 'AccountRepository/account_repository.dart';

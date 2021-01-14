@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttercommerce/cart/models/models.dart';
 import 'package:fluttercommerce/Repository/repository.dart';
 import 'package:fluttercommerce/cart/bloc/cart.dart';
+import 'package:fluttercommerce/account/view/account.dart';
 
 class Checkout extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _CheckoutState extends State<Checkout> {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                "Checkout",
+                "Đặt hàng",
                 style: TextStyle(color: Colors.black, fontSize: 16),
               ),
               leading: IconButton(
@@ -391,7 +392,15 @@ class _CheckoutState extends State<Checkout> {
                             ),
                           ),
                           FlatButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: Account(true),
+                                ),
+                              );
+                            },
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                 vertical: 15.0,

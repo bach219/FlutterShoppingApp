@@ -4,6 +4,7 @@ import 'package:fluttercommerce/home/bloc/home_bloc/home_bloc.dart';
 import 'home_view.dart';
 import 'package:fluttercommerce/cart/bloc/cart.dart';
 import 'package:fluttercommerce/product_list/bloc/list_product_bloc/list_product.dart';
+import 'package:fluttercommerce/account/bloc/account_bloc.dart';
 
 class HomePage extends StatelessWidget {
   static Route route() {
@@ -23,6 +24,9 @@ class HomePage extends StatelessWidget {
           BlocProvider<ListProductBloc>(
             create: (_) => ListProductBloc()..add(ListProductStarted()),
           ),
+          // BlocProvider<InfoBloc>(
+          //   create: (_) => InfoBloc()..add(InfoStarted()),
+          // ),
         ],
         child: MaterialApp(
           home: Home(),

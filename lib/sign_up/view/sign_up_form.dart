@@ -280,6 +280,7 @@ class _AddressInput extends StatelessWidget {
                     .add(SignUpAddressChanged(address)),
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.text,
+                maxLines: null,
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).dividerColor,
                   // hintText: "Email",
@@ -404,7 +405,9 @@ class _SignUpButton extends StatelessWidget {
         builder: (context, state) {
           return state.status.isSubmissionInProgress
               ? const CircularProgressIndicator(
-                  backgroundColor: Color(0xFFDBCC8F), valueColor: AlwaysStoppedAnimation<Color>(Colors.white),)
+                  backgroundColor: Color(0xFFDBCC8F),
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                )
               : Container(
                   child: Padding(
                     padding: const EdgeInsets.only(

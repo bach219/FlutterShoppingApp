@@ -183,6 +183,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           sex: state.sex.value,
           name: state.name.value,
         );
+
+        
         yield state.copyWith(status: FormzStatus.submissionSuccess);
       } on Exception catch (_) {
         yield state.copyWith(status: FormzStatus.submissionFailure);

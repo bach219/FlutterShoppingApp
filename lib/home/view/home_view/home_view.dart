@@ -21,6 +21,7 @@ import 'package:fluttercommerce/product_list/view/product_list_view.dart';
 import 'package:fluttercommerce/search/view/search_page.dart';
 import 'package:fluttercommerce/cart/view/cart_view.dart';
 import 'package:fluttercommerce/cart/bloc/cart.dart';
+import 'package:fluttercommerce/account/view/account.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -180,7 +181,7 @@ class _HomeState extends State<Home> {
                     )),
                     WhellFortune(),
                     ShoppingCart(false),
-                    UserSettings(),
+                    Account(false),
                   ],
                 ),
               ),

@@ -2,8 +2,10 @@ import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-
+import '../view/info_view/info_page.dart';
 import 'package:flutter_icons/ionicons.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:fluttercommerce/account/view/info_view/info_view.dart';
 
 class AccountSettings extends StatefulWidget {
   @override
@@ -35,37 +37,20 @@ class _AccountSettingsState extends State<AccountSettings> {
           child: Column(
             children: <Widget>[
               GestureDetector(
-                onTap: () {},
-                child: Container(
-                  child: Card(
-                    child: ListTile(
-                      title: Text(
-                        "My Brands",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.7), fontSize: 18),
-                      ),
-                      leading: Division(
-                        style: StyleClass()
-                          ..backgroundColor("#9F6083")
-                          ..add(settingsItemIconStyle),
-                        child: Icon(
-                          Feather.getIconData("package"),
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.fade,
+                      child: InfoPage(),
                     ),
-                    elevation: 1,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {},
+                  );
+                },
                 child: Container(
                   child: Card(
                     child: ListTile(
                       title: Text(
-                        "My Information",
+                        "Thông tin cá nhân",
                         style: TextStyle(
                             color: Colors.black.withOpacity(0.7), fontSize: 18),
                       ),
@@ -90,57 +75,7 @@ class _AccountSettingsState extends State<AccountSettings> {
                   child: Card(
                     child: ListTile(
                       title: Text(
-                        "Address",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.7), fontSize: 18),
-                      ),
-                      leading: Division(
-                        style: StyleClass()
-                          ..backgroundColor("#57CFE2")
-                          ..add(settingsItemIconStyle),
-                        child: Icon(
-                          Feather.getIconData("map-pin"),
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                    elevation: 1,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  child: Card(
-                    child: ListTile(
-                      title: Text(
-                        "Credit Cards",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.7), fontSize: 18),
-                      ),
-                      leading: Division(
-                        style: StyleClass()
-                          ..backgroundColor("#606B7E")
-                          ..add(settingsItemIconStyle),
-                        child: Icon(
-                          Feather.getIconData("credit-card"),
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                    elevation: 1,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  child: Card(
-                    child: ListTile(
-                      title: Text(
-                        "Change Password",
+                        "Thay đổi mật khẩu",
                         style: TextStyle(
                             color: Colors.black.withOpacity(0.7), fontSize: 18),
                       ),
@@ -167,7 +102,7 @@ class _AccountSettingsState extends State<AccountSettings> {
                   child: Card(
                     child: ListTile(
                       title: Text(
-                        "Exit",
+                        "Thoát ứng dụng",
                         style: TextStyle(
                             color: Colors.black.withOpacity(0.7), fontSize: 18),
                       ),
