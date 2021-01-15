@@ -15,22 +15,20 @@ import 'package:formz/formz.dart';
 class ChangPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<InfoBloc, InfoState>(
+    return BlocListener<RepassBloc, RepassState>(
         listener: (context, state) {
           if (state.status.isSubmissionFailure) {
             Scaffold.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                const SnackBar(
-                    content: Text(
-                        'Đã xảy ra sự cố! Không thể tải dữ liệu cá nhân :(')),
+                const SnackBar(content: Text('Mật khẩu hiện tại chưa đúng :(')),
               );
           }
         },
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              "Thông tin cá nhân",
+              "Thay đổi mật khẩu",
               style: TextStyle(color: Colors.black, fontSize: 16),
             ),
             leading: IconButton(
@@ -54,12 +52,10 @@ class ChangPassword extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        _NameInput(),
-                        _SexInput(),
-                        _AddressInput(),
-                        _EmailInput(),
-                        _PhoneInput(),
-                        _InfoButton()
+                        _OldPasswordInput(),
+                        _NewPasswordInput(),
+                        _ConfirmPasswordInput(),
+                        _RepassButton()
                       ],
                     ),
                   ),
@@ -71,16 +67,13 @@ class ChangPassword extends StatelessWidget {
   }
 }
 
-class _EmailInput extends StatelessWidget {
+class _OldPasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<InfoBloc, InfoState>(
+    return BlocBuilder<RepassBloc, RepassState>(
         buildWhen: (previous, current) =>
-            previous.email != current.email ||
-            previous.status != current.status,
+            previous.nowPassword != current.nowPassword,
         builder: (context, state) {
-          TextEditingController _textEditingController =
-              TextEditingController(text: state.client.email);
           return Container(
             margin: EdgeInsets.symmetric(vertical: 12.0),
             decoration: BoxDecoration(
@@ -91,125 +84,28 @@ class _EmailInput extends StatelessWidget {
               ),
             ),
             child: TextFormField(
-              key: const Key('infoForm_emailInput_textField'),
-              controller: _textEditingController,
-              // initialValue: _textEditingController.text.toString(),
-              onChanged: (email) {
-                context.read<InfoBloc>().add(InfoEmailChanged(email));
+              key: const Key('repassForm_nowPasswordInput_textField'),
+              onChanged: (nowPassword) {
+                context
+                    .read<RepassBloc>()
+                    .add(RepassPasswordNowChanged(nowPassword));
               },
               // controller: _textController,
+              obscureText: true,
               textAlign: TextAlign.center,
               keyboardType: TextInputType.text,
-              maxLines: null,
               decoration: InputDecoration(
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFF10CA88), width: 5)),
                 labelStyle: TextStyle(color: Color(0xFF4CD7A5)),
-                labelText: "Địa chỉ Email",
-                errorText: state.email.invalid ? 'Sai định dạng Email' : null,
-                hintStyle: TextStyle(fontSize: 16),
-                filled: true,
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: Color(0xFF10CA88),
-                ),
-                suffixIcon: Icon(
-                  Icons.check_circle,
-                  color: Color(0xFF10CA88),
-                ),
-              ),
-            ),
-          );
-        });
-  }
-}
-
-class _NameInput extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<InfoBloc, InfoState>(
-        buildWhen: (previous, current) =>
-            previous.name != current.name || previous.status != current.status,
-        builder: (context, state) {
-          return Container(
-            margin: EdgeInsets.symmetric(vertical: 12.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              color: Color(0xFFE7F9F5),
-              border: Border.all(
-                color: Color(0xFF4CD7A5),
-              ),
-            ),
-            child: TextField(
-              key: const Key('infoForm_nameInput_textField'),
-              controller: TextEditingController()..text = state.client.name,
-              onChanged: (name) =>
-                  context.read<InfoBloc>().add(InfoNameChanged(name)),
-              // controller: _textController,
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.text,
-              maxLines: null,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF10CA88), width: 5)),
-                labelStyle: TextStyle(color: Color(0xFF10CA88)),
-                labelText: "Tên giao dịch",
-                errorText:
-                    state.name.invalid ? 'Tên đăng nhập bị bỏ trống' : null,
-                hintStyle: TextStyle(fontSize: 16),
-                filled: true,
-                prefixIcon: Icon(
-                  Icons.supervisor_account,
-                  color: Color(0xFF10CA88),
-                ),
-                suffixIcon: Icon(
-                  Icons.check_circle,
-                  color: Color(0xFF10CA88),
-                ),
-              ),
-            ),
-          );
-        });
-  }
-}
-
-class _AddressInput extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<InfoBloc, InfoState>(
-        buildWhen: (previous, current) =>
-            previous.address != current.address ||
-            previous.status != current.status,
-        builder: (context, state) {
-          return Container(
-            margin: EdgeInsets.symmetric(vertical: 12.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              color: Color(0xFFE7F9F5),
-              border: Border.all(
-                color: Color(0xFF4CD7A5),
-              ),
-            ),
-            child: TextField(
-              key: const Key('infoForm_addressInput_textField'),
-              onChanged: (address) =>
-                  context.read<InfoBloc>().add(InfoAddressChanged(address)),
-              controller: TextEditingController()..text = state.client.address,
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.text,
-              maxLines: null,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF10CA88), width: 5)),
-                labelStyle: TextStyle(color: Color(0xFF4CD7A5)),
-                labelText: "Địa chỉ giao hàng",
-                errorText: state.address.invalid
-                    ? 'Địa chỉ giao hàng bị bỏ trống'
+                labelText: "Mật khẩu cũ",
+                errorText: state.nowPassword.invalid
+                    ? 'Mật khẩu phải có ít nhất 6 kí tự'
                     : null,
                 hintStyle: TextStyle(fontSize: 16),
                 filled: true,
                 prefixIcon: Icon(
-                  Icons.home,
+                  Icons.code,
                   color: Color(0xFF10CA88),
                 ),
                 suffixIcon: Icon(
@@ -223,13 +119,12 @@ class _AddressInput extends StatelessWidget {
   }
 }
 
-class _PhoneInput extends StatelessWidget {
+class _NewPasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<InfoBloc, InfoState>(
+    return BlocBuilder<RepassBloc, RepassState>(
         buildWhen: (previous, current) =>
-            previous.phone != current.phone ||
-            previous.status != current.status,
+            previous.newPassword != current.newPassword,
         builder: (context, state) {
           return Container(
             margin: EdgeInsets.symmetric(vertical: 12.0),
@@ -240,72 +135,29 @@ class _PhoneInput extends StatelessWidget {
                 color: Color(0xFF4CD7A5),
               ),
             ),
-            child: TextField(
-              key: const Key('infoForm_phoneInput_textField'),
-              onChanged: (phone) =>
-                  context.read<InfoBloc>().add(InfoPhoneChanged(phone)),
-              controller: TextEditingController()..text = state.client.phone,
-              textAlign: TextAlign.center,
-              keyboardType: TextInputType.number,
-              maxLines: null,
-              decoration: InputDecoration(
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFF10CA88), width: 5)),
-                labelStyle: TextStyle(color: Color(0xFF4CD7A5)),
-                labelText: "Số điện thoại",
-                errorText:
-                    state.phone.invalid ? 'Số điện thoại không đúng' : null,
-                hintStyle: TextStyle(fontSize: 16),
-                filled: true,
-                prefixIcon: Icon(
-                  Icons.phone,
-                  color: Color(0xFF10CA88),
-                ),
-                suffixIcon: Icon(
-                  Icons.check_circle,
-                  color: Color(0xFF10CA88),
-                ),
-              ),
-            ),
-          );
-        });
-  }
-}
-
-class _SexInput extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<InfoBloc, InfoState>(
-        buildWhen: (previous, current) =>
-            previous.sex != current.sex || previous.status != current.status,
-        builder: (context, state) {
-          return Container(
-            margin: EdgeInsets.symmetric(vertical: 12.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              color: Color(0xFFE7F9F5),
-              border: Border.all(
-                color: Color(0xFF4CD7A5),
-              ),
-            ),
-            child: TextField(
-              key: const Key('infoForm_sexInput_textField'),
-              onChanged: (sex) =>
-                  context.read<InfoBloc>().add(InfoSexChanged(sex)),
-              controller: TextEditingController()..text = state.client.sex,
+            child: TextFormField(
+              key: const Key('repassForm_newPasswordInput_textField'),
+              onChanged: (nowPassword) {
+                context
+                    .read<RepassBloc>()
+                    .add(RepassPasswordNewChanged(nowPassword));
+              },
+              // controller: _textController,
+              obscureText: true,
               textAlign: TextAlign.center,
               keyboardType: TextInputType.text,
-              maxLines: null,
               decoration: InputDecoration(
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFF10CA88), width: 5)),
                 labelStyle: TextStyle(color: Color(0xFF4CD7A5)),
-                labelText: "Giới tính",
-                errorText: state.sex.invalid ? 'Nam | Nữ' : null,
+                labelText: "Mật khẩu mới",
+                errorText: state.nowPassword.invalid
+                    ? 'Mật khẩu phải có ít nhất 6 kí tự'
+                    : null,
                 hintStyle: TextStyle(fontSize: 16),
                 filled: true,
                 prefixIcon: Icon(
-                  Icons.supervised_user_circle,
+                  Icons.code,
                   color: Color(0xFF10CA88),
                 ),
                 suffixIcon: Icon(
@@ -319,10 +171,63 @@ class _SexInput extends StatelessWidget {
   }
 }
 
-class _InfoButton extends StatelessWidget {
+class _ConfirmPasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<InfoBloc, InfoState>(
+    return BlocBuilder<RepassBloc, RepassState>(
+        buildWhen: (previous, current) =>
+            previous.passwordVerify != current.passwordVerify ||
+            previous.newPassword != current.newPassword,
+        builder: (context, state) {
+          return Container(
+            margin: EdgeInsets.symmetric(vertical: 12.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              color: Color(0xFFE7F9F5),
+              border: Border.all(
+                color: Color(0xFF4CD7A5),
+              ),
+            ),
+            child: TextFormField(
+              key: const Key('repassForm_passwordVerifyInput_textField'),
+              onChanged: (passwordVerify) {
+                context
+                    .read<RepassBloc>()
+                    .add(RepassPasswordVerifyChanged(passwordVerify));
+              },
+              obscureText: true,
+              // controller: _textController,
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF10CA88), width: 5)),
+                labelStyle: TextStyle(color: Color(0xFF4CD7A5)),
+                labelText: "Xác nhận mật khẩu mới",
+                errorText: state.passwordVerify.invalid
+                    ? 'Xác nhận mật khẩu chưa đúng'
+                    : null,
+                hintStyle: TextStyle(fontSize: 16),
+                filled: true,
+                prefixIcon: Icon(
+                  Icons.confirmation_num,
+                  color: Color(0xFF10CA88),
+                ),
+                suffixIcon: Icon(
+                  Icons.check_circle,
+                  color: Color(0xFF10CA88),
+                ),
+              ),
+            ),
+          );
+        });
+  }
+}
+
+class _RepassButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<RepassBloc, RepassState>(
         buildWhen: (previous, current) => previous.status != current.status,
         builder: (context, state) {
           return state.status.isSubmissionInProgress
@@ -348,7 +253,9 @@ class _InfoButton extends StatelessWidget {
                     color: Color(0xFFDBCC8F),
                     onPressed: state.status.isValidated
                         ? () {
-                            context.read<InfoBloc>().add(const InfoSubmitted());
+                            context
+                                .read<RepassBloc>()
+                                .add(const RepassSubmitted());
                           }
                         : null,
                     child: Container(
@@ -374,31 +281,5 @@ class _InfoButton extends StatelessWidget {
                   ),
                 );
         });
-  }
-}
-
-class Cart extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(builder: (context, state) {
-      print("state:              $state");
-      if (state is CartLoading) {
-        return const CircularProgressIndicator();
-      }
-      if (state is CartLoaded) {
-        return Positioned(
-            left: 5,
-            bottom: 10,
-            child: state.cart.totalLength > 0
-                ? Text(state.cart.totalLength.toString(),
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        height: 5,
-                        fontSize: 12))
-                : Text(""));
-      }
-      return const Text('Something went wrong!');
-    });
   }
 }

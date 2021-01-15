@@ -148,6 +148,14 @@ class _ProductListState extends State<ProductList> {
                       "Lọc sản phẩm",
                       style: TextStyle(color: Colors.black),
                     ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.arrow_upward,
+                        color: Colors.black,
+                        size: 16,
+                      ),
+                    ),
                   ],
                 ),
               ),

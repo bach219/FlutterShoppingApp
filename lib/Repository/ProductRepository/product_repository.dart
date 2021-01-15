@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:fluttercommerce/Repository/UserRepository/user_repository.dart';
 import 'package:fluttercommerce/models/models.dart';
 import 'package:fluttercommerce/network/api.dart';
+import 'package:meta/meta.dart';
+import 'package:hive/hive.dart';
 
 class ProductRepository {
   // User _user;
@@ -54,5 +56,24 @@ class ProductRepository {
       return null;
     }
     return null;
+  }
+
+  Future<bool> postComment({
+    @required String comment,
+  }) async {
+    assert(comment != null);
+    print("postComment");
+    await Hive.openBox('Box');
+    var box = Hive.box('Box');
+    String id = box.get('idDetail');
+    var data = await UserRepository().getToken();
+    Map<String, String> map = {
+      'content': comment,
+      'id': id,
+    };
+    map.addAll(data);
+    var res = await CallApi().postData(map, 'postComment');
+    if (res.statusCode == 200) return true;
+    return false;
   }
 }

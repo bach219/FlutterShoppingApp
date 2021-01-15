@@ -86,11 +86,12 @@ class _EmailInput extends StatelessWidget {
                 key: const Key('loginForm_emailInput_textField'),
                 onChanged: (email) =>
                     context.read<LoginBloc>().add(LoginEmailChanged(email)),
-                textAlign: TextAlign.left,
+                textAlign: TextAlign.center,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).dividerColor,
-                  // hintText: "Email",
+                  hintText: "abc@gmail.com",
+                  icon: const Icon(Icons.email),
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Địa chỉ Email",
                   errorText: state.email.invalid ? 'Sai định dạng email' : null,
@@ -103,10 +104,10 @@ class _EmailInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(
-                    Icons.email,
-                    color: Colors.black,
-                  ),
+                  // prefixIcon: Icon(
+                  //   Icons.email,
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ),
@@ -130,11 +131,12 @@ class _PasswordInput extends StatelessWidget {
                 onChanged: (password) => context
                     .read<LoginBloc>()
                     .add(LoginPasswordChanged(password)),
-                textAlign: TextAlign.left,
+                textAlign: TextAlign.center,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).dividerColor,
-                  // hintText: "Password",
+                  hintText: "******",
+                  icon: const Icon(Icons.code),
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Mật khẩu",
                   errorText: state.password.invalid
@@ -149,10 +151,10 @@ class _PasswordInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(
-                    Icons.code,
-                    color: Colors.black,
-                  ),
+                  // prefixIcon: Icon(
+                  //   Icons.code,
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ),

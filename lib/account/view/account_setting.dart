@@ -6,6 +6,7 @@ import '../view/info_view/info_page.dart';
 import 'package:flutter_icons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:fluttercommerce/account/view/info_view/info_view.dart';
+import '../view/repass_view/repass_page.dart';
 
 class AccountSettings extends StatefulWidget {
   @override
@@ -70,7 +71,15 @@ class _AccountSettingsState extends State<AccountSettings> {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                      type: PageTransitionType.fade,
+                      child: RepassPage(),
+                    ),
+                  );
+                },
                 child: Container(
                   child: Card(
                     child: ListTile(

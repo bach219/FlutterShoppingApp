@@ -18,6 +18,7 @@ import 'package:fluttercommerce/product_list/view/product_list_view.dart';
 import 'package:fluttercommerce/cart/bloc/cart.dart';
 import 'package:fluttercommerce/cart/view/cart_view.dart';
 import 'package:fluttercommerce/cart/models/models.dart';
+import 'package:fluttercommerce/product_detail/view/comment_view/comment_page.dart';
 
 class ProductPage extends StatefulWidget {
   final Product product;
@@ -544,7 +545,11 @@ class _ProductPageState extends State<ProductPage> {
                     textAlign: TextAlign.end,
                   ),
                   onTap: () {
-                    // _settingComment(context);
+                    showDialog(
+                      context: context,
+                      // ignore: deprecated_member_use
+                      child: CommentPage(),
+                    );
                   },
                 ),
               ],
@@ -736,48 +741,6 @@ void _settingModalBottomSheet(context, String description) {
         );
       });
 }
-
-// void _settingComment(context) {
-
-//   showModalBottomSheet(
-//       context: context,
-//       builder: (BuildContext bc) {
-//         return SingleChildScrollView(
-//           child: Container(
-//             width: MediaQuery.of(context).size.width,
-//             child: Container(
-//               padding: EdgeInsets.all(16.0),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                 children: <Widget>[
-//                   Text(
-//                     "Mô tả",
-//                     style: TextStyle(
-//                       fontWeight: FontWeight.bold,
-//                       color: Colors.black45,
-//                       fontSize: 18,
-//                     ),
-//                   ),
-//                   SizedBox(
-//                     height: 8,
-//                   ),
-//                   SingleChildScrollView(
-//                       child: Column(children: [
-//                     Html(
-//                       data: """$description""",
-//                     ),
-//                   ])),
-//                   SizedBox(
-//                     height: 8,
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         );
-//       });
-// }
 
 class AddItem extends StatelessWidget {
   final Product product;

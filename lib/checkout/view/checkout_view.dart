@@ -69,6 +69,10 @@ class _CheckoutState extends State<Checkout> {
                                 Icons.check_circle,
                                 color: Color(0xFF10CA88),
                               ),
+                              leading: Icon(
+                                Icons.home,
+                                color: Color(0xFF10CA88),
+                              ),
                               title: Text(state.client.address ?? ""),
                               // subtitle: Text("125 Lorem Ipsum"),
                             ),

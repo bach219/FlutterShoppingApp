@@ -99,9 +99,10 @@ class _EmailInput extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).dividerColor,
-                  // hintText: "Email",
+                  hintText: "abc@gmail.com",
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Địa chỉ Email",
+                  icon: const Icon(Icons.email),
                   errorText: state.email.invalid ? 'Sai định dạng Email' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -112,10 +113,10 @@ class _EmailInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(
-                    Icons.email,
-                    color: Colors.black,
-                  ),
+                  // prefixIcon: Icon(
+                  //   Icons.email,
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ),
@@ -143,9 +144,11 @@ class _PasswordInput extends StatelessWidget {
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
+                  icon: const Icon(Icons.code),
                   fillColor: Theme.of(context).dividerColor,
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Mật khẩu",
+                  hintText: "******",
                   errorText: state.password.invalid
                       ? 'Mật khẩu phải có ít nhất 6 kí tự'
                       : null,
@@ -158,10 +161,10 @@ class _PasswordInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(
-                    Icons.code,
-                    color: Colors.black,
-                  ),
+                  // prefixIcon: Icon(
+                  //   Icons.code,
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ),
@@ -192,7 +195,8 @@ class _ConfirmPasswordInput extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).dividerColor,
-                  // hintText: "Email",
+                  hintText: "******",
+                  icon: const Icon(Icons.confirmation_num),
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Xác nhận mật khẩu",
                   errorText: state.passwordVerify.invalid
@@ -207,10 +211,10 @@ class _ConfirmPasswordInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(
-                    Icons.confirmation_num,
-                    color: Colors.black,
-                  ),
+                  // prefixIcon: Icon(
+                  //   Icons.confirmation_num,
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ),
@@ -237,7 +241,8 @@ class _NameInput extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).dividerColor,
-                  // hintText: "Email",
+                  hintText: "ABC",
+                  icon: const Icon(Icons.supervisor_account),
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Tên đăng nhập",
                   errorText:
@@ -251,10 +256,10 @@ class _NameInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(
-                    Icons.supervisor_account,
-                    color: Colors.black,
-                  ),
+                  // prefixIcon: Icon(
+                  //   Icons.supervisor_account,
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ),
@@ -280,10 +285,10 @@ class _AddressInput extends StatelessWidget {
                     .add(SignUpAddressChanged(address)),
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.text,
-                maxLines: null,
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).dividerColor,
-                  // hintText: "Email",
+                  hintText: "Hà Nội",
+                  icon: const Icon(Icons.house),
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Địa chỉ giao hàng",
                   errorText: state.address.invalid
@@ -298,10 +303,10 @@ class _AddressInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(
-                    Icons.house,
-                    color: Colors.black,
-                  ),
+                  // prefixIcon: Icon(
+                  //   Icons.house,
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ),
@@ -328,7 +333,8 @@ class _PhoneInput extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).dividerColor,
-                  // hintText: "Email",
+                  hintText: "0333******",
+                  icon: const Icon(Icons.phone),
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Số điện thoại",
                   errorText:
@@ -342,10 +348,10 @@ class _PhoneInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(
-                    Icons.contact_phone,
-                    color: Colors.black,
-                  ),
+                  // prefixIcon: Icon(
+                  //   Icons.contact_phone,
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ),
@@ -372,7 +378,8 @@ class _SexInput extends StatelessWidget {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   fillColor: Theme.of(context).dividerColor,
-                  // hintText: "Email",
+                  hintText: "Nam",
+                  icon: const Icon(Icons.supervised_user_circle),
                   hintStyle: Theme.of(context).textTheme.display2,
                   labelText: "Giới tính",
                   errorText: state.sex.invalid ? 'Nam | Nữ' : null,
@@ -385,10 +392,10 @@ class _SexInput extends StatelessWidget {
                   ),
                   filled: true,
                   contentPadding: EdgeInsets.all(16),
-                  prefixIcon: Icon(
-                    Icons.supervised_user_circle,
-                    color: Colors.black,
-                  ),
+                  // prefixIcon: Icon(
+                  //   Icons.supervised_user_circle,
+                  //   color: Colors.black,
+                  // ),
                 ),
               ),
             ),

@@ -92,7 +92,12 @@ class _EmailInput extends StatelessWidget {
             ),
             child: TextFormField(
               key: const Key('infoForm_emailInput_textField'),
-              controller: TextEditingController(text: state.email.value),
+              // controller: TextEditingController(text: state.email.value),
+              controller: new TextEditingController.fromValue(
+                  new TextEditingValue(
+                      text: state.email.value,
+                      selection: new TextSelection.collapsed(
+                          offset: state.email.value.length))),
               // initialValue: _textEditingController.text,
               onChanged: (email) {
                 context.read<InfoBloc>().add(InfoEmailChanged(email));
@@ -143,7 +148,13 @@ class _NameInput extends StatelessWidget {
             child: TextFormField(
               key: const Key('infoForm_nameInput_textField'),
               // initialValue: state.client.name,
-              controller: TextEditingController(text: state.name.value),
+              // controller: TextEditingController(text: state.name.value),
+              controller: new TextEditingController.fromValue(
+                  new TextEditingValue(
+                      text: state.name.value,
+                      selection: new TextSelection.collapsed(
+                          offset: state.name.value.length))),
+
               onChanged: (name) =>
                   context.read<InfoBloc>().add(InfoNameChanged(name)),
               // controller: _textController,
@@ -196,7 +207,12 @@ class _AddressInput extends StatelessWidget {
               onChanged: (address) =>
                   context.read<InfoBloc>().add(InfoAddressChanged(address)),
               // initialValue: state.client.address,
-              controller: TextEditingController(text: state.address.value),
+              // controller: TextEditingController(text: state.address.value),
+              controller: new TextEditingController.fromValue(
+                  new TextEditingValue(
+                      text: state.address.value,
+                      selection: new TextSelection.collapsed(
+                          offset: state.address.value.length))),
               textAlign: TextAlign.center,
               keyboardType: TextInputType.text,
               maxLines: null,
@@ -247,7 +263,12 @@ class _PhoneInput extends StatelessWidget {
               onChanged: (phone) =>
                   context.read<InfoBloc>().add(InfoPhoneChanged(phone)),
               // initialValue: state.client.phone,
-              controller: TextEditingController(text: state.phone.value),
+              // controller: TextEditingController(text: state.phone.value),
+              controller: new TextEditingController.fromValue(
+                  new TextEditingValue(
+                      text: state.phone.value,
+                      selection: new TextSelection.collapsed(
+                          offset: state.phone.value.length))),
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
               maxLines: null,
@@ -296,7 +317,12 @@ class _SexInput extends StatelessWidget {
               onChanged: (sex) =>
                   context.read<InfoBloc>().add(InfoSexChanged(sex)),
               // initialValue:  state.sex.value,
-              controller: TextEditingController(text: state.sex.value),
+              // controller: TextEditingController(text: state.sex.value),
+              controller: new TextEditingController.fromValue(
+                  new TextEditingValue(
+                      text: state.sex.value,
+                      selection: new TextSelection.collapsed(
+                          offset: state.sex.value.length))),
               textAlign: TextAlign.center,
               keyboardType: TextInputType.text,
               maxLines: null,

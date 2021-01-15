@@ -2,7 +2,7 @@ import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import './account_setting.dart';
-import 'package:fluttercommerce/screens/checkout.dart';
+import './order_view/order_view.dart';
 import 'package:page_transition/page_transition.dart';
 
 // ignore: must_be_immutable
@@ -70,7 +70,7 @@ class Settings extends StatelessWidget {
                 context,
                 PageTransition(
                   type: PageTransitionType.fade,
-                  child: Checkout(),
+                  child: DetailPage(),
                 ),
               );
             }),
@@ -110,23 +110,23 @@ class Settings extends StatelessWidget {
           // }),
           SettingsItem(Feather.getIconData("bell"), '#FB7C7A', 'Thông báo',
               'Những chương trình mói nhất.', () {
-            Navigator.push(
-              context,
-              PageTransition(
-                type: PageTransitionType.fade,
-                child: Checkout(),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   PageTransition(
+            //     type: PageTransitionType.fade,
+            //     child: Checkout(),
+            //   ),
+            // );
           }),
           SettingsItem(Feather.getIconData("help-circle"), '#24ACE9',
               'Trợ giúp', 'Liên hệ với chúng tôi.', () {
-            Navigator.push(
-              context,
-              PageTransition(
-                type: PageTransitionType.fade,
-                child: Checkout(),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   PageTransition(
+            //     type: PageTransitionType.fade,
+            //     child: Checkout(),
+            //   ),
+            // );
           }),
         ],
       ),
